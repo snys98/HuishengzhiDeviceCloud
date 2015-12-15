@@ -8,6 +8,7 @@ namespace DeviceCloud
         // 有关绑定的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Content/js/jquery.validate*"));
 
@@ -23,7 +24,8 @@ namespace DeviceCloud
             bundles.Add(new ScriptBundle("~/bundles/ie9-gt-js").Include(
                       "~/Content/js/jquery-1.8.2.js",
                       "~/Content/js/amazeui.js",
-                      "~/Content/js/nest.js"));
+                      "~/Content/js/nest.js",
+                      "~/Content/js/amazeui.widgets.helper.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/ie9-lt-js").Include(
                 "~/Content/js/jquery-1.8.2.js",

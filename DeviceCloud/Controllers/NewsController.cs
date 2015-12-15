@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace DeviceCloud.Controllers
 {
-    public class HomeController : Controller
+    public class NewsController : Controller
     {
+        // GET: News
+
         public ActionResult Index()
         {
             return View();

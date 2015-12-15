@@ -1,5 +1,5 @@
 ﻿@{
-	ViewBag.Title = "首页";
+	ViewBag.Title = "慧生智医疗云-首页";
 }
 
 <div class="amz-container am-cf">
@@ -30,19 +30,19 @@
 </div>
 <div id="products" class="am-g">
 	@* 此部分为产品展示 *@
-	<div class="am-g-fixed am-center">
-		<div id="product1" class="am-u-md-4" data-scrollspy="{animation: 'slide-left', delay: 500}">
-			<img class="am-img-responsive img" src="../../Content/images/home/news/1.png" alt="foundation">
+	<div class="am-g-fixed am-center" data-am-scrollspy="{animation: 'fade', delay: 500,repeat:false}">
+		<div id=" product1" class="am-u-md-4 ">
+		<img class="am-img-responsive img" src="~/Content/images/home/news/1.png" alt="foundation">
+		<h2>为移动而生</h2>
+		<p>Amaze UI 以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p><iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe>
+	</div>
+		<div id="product2" class="am-u-md-4 ">
+			<img class="am-img-responsive img" src="~/Content/images/home/news/2.png" alt="foundation">
 			<h2>为移动而生</h2>
 			<p>Amaze UI 以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p><iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe>
 		</div>
-		<div id="product2" class="am-u-md-4" data-scrollspy="{animation: 'slide-right', delay: 500}">
-			<img class="am-img-responsive img" src="../../Content/images/home/news/2.png" alt="foundation">
-			<h2>为移动而生</h2>
-			<p>Amaze UI 以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p><iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe>
-		</div>
-		<div id="product3" class="am-u-md-4" data-scrollspy="{animation: 'slide-left', delay: 500}">
-			<img class="am-img-responsive img" src="../../Content/images/home/news/3.png" alt="foundation">
+		<div id="product3" class="am-u-md-4 ">
+			<img class="am-img-responsive img" src="~/Content/images/home/news/3.png" alt="foundation">
 			<h2>为移动而生</h2>
 			<p>Amaze UI 以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流。</p><iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe>
 		</div>
@@ -50,14 +50,14 @@
 </div>
 <div id="news" class="am-g am-g-fixed">
 	@* 此部分为公司新闻 *@
-	<div id="news1" class="am-u-md-12">
+	<div id="news1" class="am-u-md-12 " data-am-scrollspy="{animation: 'slide-right', delay: 0, repeat:false}">
 		<div data-am-widget="intro" class="am-intro am-cf am-intro-one am-no-layout">
 			<div class="am-intro-hd">
 				<h2 class="am-intro-title">你好小娜</h2><a class="am-intro-more am-intro-more-top" href="#more">更多细节</a>
 			</div>
 			<div class="am-g am-intro-bd">
 				<div class="am-intro-left am-u-sm-5">
-					<img class="am-img-thumbnail" src="../../Content/images/home/news/1.png" alt="小娜">
+					<img class="am-img-thumbnail" src="~/Content/images/home/news/1.png" alt="小娜">
 				</div>
 				<div class="am-intro-right am-u-sm-7">
 					<p>Cortana 恐怕是用户急于更新到 WP8.1 Update 开发者预览版的原因之一</p>
@@ -67,14 +67,14 @@
 		</div>
 		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
 	</div>
-	<div id="news2" class="am-u-md-12">
+	<div id="news2" class="am-u-md-12 " data-am-scrollspy="{animation: 'slide-left', delay: 0, repeat:false}">
 		<div data-am-widget="intro" class="am-intro am-cf am-intro-one am-no-layout">
 			<div class="am-intro-hd">
 				<h2 class="am-intro-title">你好小娜</h2><a class="am-intro-more am-intro-more-top" href="#more">更多细节</a>
 			</div>
 			<div class="am-g am-intro-bd">
 				<div class="am-intro-left am-u-sm-5">
-					<img class="am-img-thumbnail" src="../../Content/images/home/news/2.png" alt="小娜">
+					<img class="am-img-thumbnail" src="~/Content/images/home/news/2.png" alt="小娜">
 				</div>
 				<div class="am-intro-right am-u-sm-7">
 					<p>Cortana 恐怕是用户急于更新到 WP8.1 Update 开发者预览版的原因之一</p>
@@ -84,14 +84,14 @@
 		</div>
 		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
 	</div>
-	<div id="news3" class="am-u-md-12">
+	<div id="news3" class="am-u-md-12 " data-am-scrollspy="{animation: 'slide-right', delay: 0, repeat:false}">
 		<div data-am-widget="intro" class="am-intro am-cf am-intro-one am-no-layout">
 			<div class="am-intro-hd">
 				<h2 class="am-intro-title">你好小娜</h2><a class="am-intro-more am-intro-more-top" href="#more">更多细节</a>
 			</div>
 			<div class="am-g am-intro-bd">
 				<div class="am-intro-left am-u-sm-5">
-					<img class="am-img-thumbnail" src="../../Content/images/home/news/3.png" alt="小娜">
+					<img class="am-img-thumbnail" src="~/Content/images/home/news/3.png" alt="小娜">
 				</div>
 				<div class="am-intro-right am-u-sm-7">
 					<p>Cortana 恐怕是用户急于更新到 WP8.1 Update 开发者预览版的原因之一</p>
@@ -101,14 +101,14 @@
 		</div>
 		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
 	</div>
-	<div id="news4" class="am-u-md-12">
+	<div id="news4" class="am-u-md-12" data-am-scrollspy="{animation: 'slide-left', delay: 0, repeat:false}">
 		<div data-am-widget="intro" class="am-intro am-cf am-intro-one am-no-layout">
 			<div class="am-intro-hd">
 				<h2 class="am-intro-title">你好小娜</h2><a class="am-intro-more am-intro-more-top" href="#more">更多细节</a>
 			</div>
 			<div class="am-g am-intro-bd">
 				<div class="am-intro-left am-u-sm-5">
-					<img class="am-img-thumbnail" src="../../Content/images/home/news/4.png" alt="小娜">
+					<img class="am-img-thumbnail" src="~/Content/images/home/news/4.png" alt="小娜">
 				</div>
 				<div class="am-intro-right am-u-sm-7">
 					<p>Cortana 恐怕是用户急于更新到 WP8.1 Update 开发者预览版的原因之一</p>
@@ -168,8 +168,8 @@
 			width: 100%;
 			background: #999;
 			 padding: 3em;
-			 top: 20px;
-			 opacity: 0.8;
+			 padding-top: 20px;
+			 opacity: 0.7;
 		}
 
 		#products p,h1,h2,h3,h4 {
@@ -182,10 +182,10 @@
 
 		#contact {
 			 width: 100%;
-			 background: url(../../Content/images/home/backgrounds/bg-lightblue.png);
+			 background: #0066cc;
 			 padding: 3em;
 			 padding-top: 20px;
-			 opacity: 0.8;
+			 opacity: 0.7;
 		 }
 
 		#contact h3 {
@@ -239,7 +239,7 @@
 			width: 32px;
 			height: 32px;
 			display: inline-block;
-			background: url(../../Content/images/home/icons/contact-icons.png) no-repeat 0px 0px;
+			background: url(@Url.Content("~/Content/images/home/icons/contact-icons.png")) no-repeat 0px 0px;
 			vertical-align: text-top;
 		}
 

@@ -140,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,7 +173,6 @@
     <Content Include="Content\images\examples\loginPage.png" />
     <Content Include="Content\images\examples\sidebarPage.png" />
     <Content Include="Content\images\favicon.png" />
-    <Content Include="Content\images\home\backgrounds\bg-lightblue.png" />
     <Content Include="Content\images\home\icons\contact-icons.png" />
     <Content Include="Content\images\home\news\1.png" />
     <Content Include="Content\images\home\news\2.png" />
@@ -239,9 +239,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\dev.pubxml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
