@@ -1,0 +1,38 @@
+﻿@using DeviceCloud.Models
+@using DeviceLibrary
+@using Newtonsoft.Json
+
+
+<div class="am-g-fixed">
+	<div id="Bmap" style="height: 600px;"></div>
+</div>
+@section CustomScripts
+{
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2K46masM0DfomtLM1oujOMdP"></script>
+	<script type="text/javascript" src="~/Content/js/map/map-api.js"></script>
+	<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("Bmap"); // 创建Map实例
+	map.centerAndZoom(new BMap.Point(104.072168, 30.557979), 17); // 初始化地图,设置中心点坐标和地图级别
+	map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+	map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+	$(document).ready(function () {
+		@*var infoList = eval(@JsonConvert.SerializeObject(ViewBag.Datas));
+			for (var i = 0; i < infoList.length; i++) {
+				AddWindowMaker(infoList[i].GpsInfo.Longitude, infoList[i].GpsInfo.Latitude, infoList[i].GpsInfo.Longitude,
+					"@foreach (var VARIABLE in JsonConvert.DeserializeObject<>())
+					 {
+
+					 }
+			}*@
+		var content;
+		@foreach (TranLog data in ViewBag.Monitor.Datas)
+			{
+			<text>
+			content = "@Html.Raw(@data.ToMarkerInfo())"
+		AddWindowMarker(@data.Latitude, @data.Longitude, content);
+			</text>
+			}
+	}());
+</script>
+}
