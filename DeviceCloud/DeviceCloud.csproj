@@ -52,9 +52,6 @@
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DeviceLibrary">
-      <HintPath>..\..\SocketTest\DeviceLibrary\bin\Debug\DeviceLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -268,10 +265,15 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Content\js\jquery-2.1.4.intellisense.js" />
     <None Include="Content\js\jquery.validate-vsdoc.js" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SocketServer\DeviceLibrary\DeviceLibrary.csproj">
+      <Project>{203cae52-d837-47fc-8d70-1d8dfb7a322b}</Project>
+      <Name>DeviceLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

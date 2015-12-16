@@ -50,9 +50,9 @@ var styleOptions = {
 
 //地图平移
 
-function PanTo(lat, lng) {
+function PanTo(lng, lat) {
 
-    map.panTo(new BMap.Point(lat, lng));
+    map.panTo(new BMap.Point(lng, lat));
 
 }
 
@@ -60,9 +60,9 @@ function PanTo(lat, lng) {
 
 function GetCenter() {
 
-    document.getElementById("lat").innerText = map.getCenter().lat;
-
     document.getElementById("lng").innerText = map.getCenter().lng;
+
+    document.getElementById("lat").innerText = map.getCenter().lat;
 
 }
 
@@ -136,9 +136,9 @@ function DisableScrollWheelZoom() {
 
 //添加普通标注
 
-function AddNormalMarker(lat, lng) {
+function AddNormalMarker(lng, lat) {
 
-    var marker = new BMap.Marker(new BMap.Point(lat, lng));  // 创建标注
+    var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注
 
     map.addOverlay(marker);
 
@@ -162,15 +162,15 @@ function CloseMarkerDraging() {
 
 //添加动画标注
 
-function AddAnimationMarker(lat, lng) {
+function AddAnimationMarker(lng, lat) {
 
 }
 
 //添加包含一个标签的标注
 
-function AddLabelMarker(lat, lng, content) {
+function AddLabelMarker(lng, lat, content) {
 
-    var marker = new BMap.Marker(new BMap.Point(lat, lng));  // 创建标注
+    var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注
 
     var label = new BMap.Label(content);
 
@@ -181,9 +181,9 @@ function AddLabelMarker(lat, lng, content) {
 
 //添加包含一个信息窗口的标注
 
-function AddWindowMarker(lat, lng, content) {
+function AddWindowMarker(lng, lat, content) {
 
-    var marker = new BMap.Marker(new BMap.Point(lat, lng));  // 创建标注
+    var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注
 
     marker.addEventListener("click", function () {
 
@@ -200,9 +200,9 @@ function AddWindowMarker(lat, lng, content) {
 
 //添加一个信息窗口
 
-function AddInfoWindow(lat, lng, content) {
+function AddInfoWindow(lng, lat, content) {
 
-    var point = new BMap.Point(lat, lng);
+    var point = new BMap.Point(lng, lat);
 
     var info = new BMap.InfoWindow(content);
 
@@ -212,9 +212,9 @@ function AddInfoWindow(lat, lng, content) {
 
 //添加一个标注
 
-function AddLabel(lat, lng, content) {
+function AddLabel(lng, lat, content) {
 
-    var point = new BMap.Point(lat, lng);
+    var point = new BMap.Point(lng, lat);
 
     var label = new BMap.Label(content, { point: point });
 
@@ -248,11 +248,11 @@ function Remove() {
 
 //返回指定坐标所在地址
 
-function GetByPoint(lat, lng) {
+function GetByPoint(lng, lat) {
 
     var gc = new BMap.Geocoder();
 
-    pt = new BMap.Point(lat, lng);
+    pt = new BMap.Point(lng, lat);
 
     gc.getLocation(pt, function (rs) {
 
@@ -286,9 +286,9 @@ function GetByAddress(geo) {
 
             map.addOverlay(new BMap.Marker(point));
 
-            document.getElementById("lat").innerText = point.lat;
-
             document.getElementById("lng").innerText = point.lng;
+
+            document.getElementById("lat").innerText = point.lat;
 
         }
 
