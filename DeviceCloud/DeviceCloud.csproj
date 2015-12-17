@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SampleMonitorController.cs" />
@@ -252,6 +253,7 @@
     <None Include="Properties\PublishProfiles\dev.pubxml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\SampleMonitor\Index.cshtml" />
+    <Content Include="Views\Shared\LoginModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

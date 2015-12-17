@@ -18,7 +18,7 @@ namespace DeviceCloud.Models
         public string SampleId { get; private set; }
         public string DeviceId { get; private set; }
 
-        public List<TranLog> Datas { get; private set; }
+        public List<TranLog> TransLogs { get; private set; }
 
         public SampleMonitor(string sampleId,string deviceId)
         {
@@ -26,28 +26,28 @@ namespace DeviceCloud.Models
             DeviceId = deviceId;
             using (SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("SampleMonitorConnectionString")))
             {
-                Datas = con.Query<TranLog>(string.Format("SELECT * FROM dbo.TranLog WHERE TranId = '{0}' AND DeviceAddress = '{1}'", sampleId, deviceId)).ToList();
+                TransLogs = con.Query<TranLog>(string.Format("SELECT * FROM dbo.TranLog WHERE TranId = '{0}' AND DeviceAddress = '{1}'", sampleId, deviceId)).ToList();
             }
-            Datas.ConvertToBaiduCord();
+            TransLogs.ConvertToBaiduCord();
+        }
+
+        public SampleMonitor(DateTime startTime,DateTime endTime,string deviceId)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("SampleMonitorConnectionString")))
+            {
+                TransLogs =
+                    con.Query<TranLog>(
+                        string.Format(
+                            "SELECT * FROM dbo.TranLog WHERE UploadTime>'{0}' and UploadTime<'{1}' AND DeviceAddress = '{2}'",
+                            startTime.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), deviceId))
+                        .ToList();
+            }
+            TransLogs.ConvertToBaiduCord();
         }
     }
 
     public static class SampleMonitorExtentions
     {
-        /// <summary>
-        /// 根据单个转运记录构造气泡
-        /// </summary>
-        /// <param name="tranLog"></param>
-        /// <returns></returns>
-        public static string ToMarkerInfo(this TranLog tranLog)
-        {
-            string html = "<div>";
-            html += string.Format("<p>温度: {0} ℃<p>", tranLog.Temperature);
-            html += string.Format("<p>湿度: {0} %<p>", tranLog.Humidity);
-            html += "</div>";
-            return html;
-        }
-
         /// <summary>
         /// 将转运记录(集合)的坐标系转换到百度坐标,Todo:坐标转换后位置不准&网络访问性能优化和服务器cpu性能优化哪个重要
         /// </summary>
