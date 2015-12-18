@@ -25,11 +25,13 @@ namespace DeviceCloud
                       "~/Content/js/jquery-1.8.2.js",
                       "~/Content/js/amazeui.js",
                       "~/Content/js/nest.js",
-                      "~/Content/js/amazeui.widgets.helper.js"));
+                      "~/Content/js/amazeui.widgets.helper.js",
+                      "~/Content/js/vue.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/ie9-lt-js").Include(
                 "~/Content/js/jquery-1.8.2.js",
-                "~/Content/js/amazeui.ie8polyfill.js"));
+                "~/Content/js/amazeui.ie8polyfill.js",
+                "~/Content/js/vue.js"));
         }
     }
 }

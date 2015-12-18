@@ -38,7 +38,7 @@ namespace DeviceCloud.Models
                 TransLogs =
                     con.Query<TranLog>(
                         string.Format(
-                            "SELECT a.Longitude,a.Latitude,a.UploadTime,a.Humidity,a.Temperature FROM dbo.TranLog as a WHERE UploadTime>'{0}' and UploadTime<'{1}' AND DeviceAddress = '{2}'",
+                            "SELECT a.Longitude,a.Latitude,a.UploadTime,a.Humidity,a.Temperature FROM dbo.TranLog as a WHERE UploadTime>'{0}' and UploadTime<'{1}' AND DeviceAddress = '{2}' ORDER BY UploadTime",
                             startTime.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), deviceId))
                         .ToList();
             }
