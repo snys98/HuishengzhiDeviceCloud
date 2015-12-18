@@ -20,9 +20,9 @@
 			text-align: center;
 			background: #196dbe;
 		}
-			.footer p a {
-				color:#adc8f8 !important;
-			}
+		.footer p a {
+			color:#adc8f8 !important;
+		}
 	</style>
 	@RenderSection("CustomStyle",false)
 </head>
@@ -39,10 +39,10 @@
 		</button>
 
 		<div class="am-collapse am-topbar-collapse" id="collapse-head">
-			<ul class="am-nav am-nav-pills am-topbar-nav">
-				<li class="am-active"><a href="#">首页</a></li>
-				<li><a href="#">项目</a></li>
-				<li class="am-dropdown" data-am-dropdown>
+			<ul id="navbar" class="am-nav am-nav-pills am-topbar-nav">
+				<li id="nav-item-home"><a href="/">首页</a></li>
+				<li id="nav-item-monitor"><a href="@Url.Action("Index","SampleMonitor")">样本监控</a></li>
+				@*<li class="am-dropdown" data-am-dropdown>
 					<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
 						下拉菜单 <span class="am-icon-caret-down"></span>
 					</a>
@@ -53,7 +53,8 @@
 						<li><a href="#">3. 文字排版</a></li>
 						<li><a href="#">4. 网格系统</a></li>
 					</ul>
-				</li>
+				</li>*@
+				<li id="nav-item-news"><a href="@Url.Action("Index","News")">新闻</a></li>
 			</ul>
 
 			<div class="am-topbar-right">
@@ -85,6 +86,9 @@
 	<![endif]-->
 	<!--[if (gte IE 9)|!(IE)]><!-->
 	@Scripts.Render("~/bundles/ie9-gt-js")
+<script>
+	$('#@ViewBag.NavId').attr('class','am-active');
+</script>
 	<!--<![endif]-->
 	@RenderSection("CustomScripts",false)
 </body>

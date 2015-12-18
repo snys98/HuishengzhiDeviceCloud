@@ -20,7 +20,7 @@ namespace DeviceCloud.Models
 
         public List<TranLog> TransLogs { get; private set; }
 
-        public SampleMonitor(string sampleId,string deviceId)
+        public SampleMonitor(string sampleId, string deviceId)
         {
             SampleId = sampleId;
             DeviceId = deviceId;
@@ -31,9 +31,9 @@ namespace DeviceCloud.Models
             TransLogs.ConvertToBaiduCord();
         }
 
-        public SampleMonitor(DateTime startTime,DateTime endTime,string deviceId)
+        public SampleMonitor(DateTime startTime, DateTime endTime, string deviceId)
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("SampleMonitorConnectionString")))
+            using (SqlConnection con = Db.Create())
             {
                 TransLogs =
                     con.Query<TranLog>(

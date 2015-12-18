@@ -12,6 +12,7 @@ namespace DeviceCloud.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.NavId = "nav-item-news";
             return View();
         }
     }

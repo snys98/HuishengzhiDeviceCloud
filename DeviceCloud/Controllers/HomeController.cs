@@ -10,6 +10,7 @@ namespace DeviceCloud.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.NavId = "nav-item-home";
             return View();
         }
     }

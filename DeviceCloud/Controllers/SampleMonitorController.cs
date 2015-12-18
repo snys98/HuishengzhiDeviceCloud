@@ -16,7 +16,7 @@ namespace DeviceCloud.Controllers
         public ActionResult Index()
         {
             //var sampleMonitor = new SampleMonitor(sampleId,deviceId);
-            //ViewBag.Monitor = sampleMonitor;
+            ViewBag.NavId = "nav-item-monitor";
             return View();
         }
 

@@ -1,44 +1,29 @@
-﻿//去除网页中的连接地址
-
-window.onload = inifA;
-
-function inifA() {
-
-    for (var i = 0; i < document.getElementsByTagName("a").length; i++) {
-
-        document.getElementsByTagName("a")[i].onclick = function () { return false }
-
-    }
-
-}
-
-//*定义必要的公共变量
-
-var Marker;//标注对象
+﻿//*定义必要的公共变量
 
 var distance;//测距对象
 
-var drawingManager;//绘图对象
+var Line;//路径对象
+var Points = [];//路径包含的点
+var lineStyleOptions = {
+
+strokeColor: "blue",    //边线颜色。
+
+fillColor: "blue",      //填充颜色。当参数为空时，圆形将没有填充效果。
+
+        strokeWeight: 4,       //边线的宽度，以像素为单位。
+
+    strokeOpacity: 0.6,       //边线透明度，取值范围0 - 1。
+
+        fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
+
+        strokeStyle: 'solid' //边线的样式，solid或dashed。
+
+}
+
+var markerStyleOption = { icon: new BMap.Icon("../../Content/images/map/marker.png", new BMap.Size(20, 20)) };
 
 var drag;//拖框缩放对象
 
-//绘制工具栏外观设定
-
-var styleOptions = {
-
-    strokeColor: "red",    //边线颜色。
-
-    fillColor: "red",      //填充颜色。当参数为空时，圆形将没有填充效果。
-
-    strokeWeight: 3,       //边线的宽度，以像素为单位。
-
-    strokeOpacity: 0.8,       //边线透明度，取值范围0 - 1。
-
-    fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
-
-    strokeStyle: 'solid' //边线的样式，solid或dashed。
-
-}
 
 //*
 
@@ -50,7 +35,7 @@ var styleOptions = {
 
 //地图平移
 
-function PanTo(lng, lat) {
+function map_api_PanTo(lng, lat) {
 
     map.panTo(new BMap.Point(lng, lat));
 
@@ -58,7 +43,7 @@ function PanTo(lng, lat) {
 
 //返回当前地图中心坐标
 
-function GetCenter() {
+function map_api_GetCenter() {
 
     document.getElementById("lng").innerText = map.getCenter().lng;
 
@@ -68,7 +53,7 @@ function GetCenter() {
 
 //设置当前地图所在城市
 
-function SetCity(CityName) {
+function map_api_SetCity(CityName) {
 
     map.setCenter(CityName);
 
@@ -76,7 +61,7 @@ function SetCity(CityName) {
 
 //将地图放大一级
 
-function ZoomIn() {
+function map_api_ZoomIn() {
 
     map.zoomIn();
 
@@ -84,7 +69,7 @@ function ZoomIn() {
 
 //将地图缩小一级
 
-function ZoomOut() {
+function map_api_ZoomOut() {
 
     map.zoomOut();
 
@@ -92,7 +77,7 @@ function ZoomOut() {
 
 //添加地图类型控件
 
-function AddMapTypeControl() {
+function map_api_AddMapTypeControl() {
 
     map.addControl(new BMap.MapTypeControl());
 
@@ -100,7 +85,7 @@ function AddMapTypeControl() {
 
 //添加比例尺控件
 
-function AddScaleControl() {
+function map_api_AddScaleControl() {
 
     map.addControl(new BMap.ScaleControl());
 
@@ -108,7 +93,7 @@ function AddScaleControl() {
 
 //添加缩略图控件
 
-function AddOverviewMapControl() {
+function map_api_AddOverviewMapControl() {
 
     map.addControl(new BMap.OverviewMapControl());
 
@@ -116,7 +101,7 @@ function AddOverviewMapControl() {
 
 //开启滚轮调节地图
 
-function EnableScrollWheelZoom() {
+function map_api_EnableScrollWheelZoom() {
 
     map.enableScrollWheelZoom();
 
@@ -124,7 +109,7 @@ function EnableScrollWheelZoom() {
 
 //关闭滚轮调节地图
 
-function DisableScrollWheelZoom() {
+function map_api_DisableScrollWheelZoom() {
 
     map.disableScrollWheelZoom();
 
@@ -136,54 +121,38 @@ function DisableScrollWheelZoom() {
 
 //添加普通标注
 
-function AddNormalMarker(lng, lat) {
-
-    var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注
+function map_api_AddNormalMarker(lng, lat) {
+    var point = new BMap.Point(lng, lat);
+    var marker = new BMap.Marker(point);  // 创建标注
 
     map.addOverlay(marker);
-
-}
-
-//标注开启拖拽
-
-function OpenMarkerDraging() {
-
-    marker.enableDragging(true);
-
-}
-
-//标注关闭拖拽
-
-function CloseMarkerDraging() {
-
-    marker.disableDragging(true);
-
+    Points.push(point);
 }
 
 //添加动画标注
 
-function AddAnimationMarker(lng, lat) {
+function map_api_AddAnimationtempMarker(lng, lat) {
 
 }
 
 //添加包含一个标签的标注
 
-function AddLabelMarker(lng, lat, content) {
-
-    var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注
+function map_api_AddLabelMarker(lng, lat, content) {
+    var point = new BMap.Point(lng, lat);
+    var marker = new BMap.Marker(point);  // 创建标注
 
     var label = new BMap.Label(content);
 
     marker.setLabel(label);
     map.addOverlay(marker);
-
+    Points.push(point);
 }
 
 //添加包含一个信息窗口的标注
 
-function AddWindowMarker(lng, lat, content) {
-
-    var marker = new BMap.Marker(new BMap.Point(lng, lat));  // 创建标注
+function map_api_AddWindowMarker(lng, lat, content) {
+    var point = new BMap.Point(lng, lat);
+    var marker = new BMap.Marker(point, markerStyleOption);  // 创建标注
 
     marker.addEventListener("click", function () {
 
@@ -195,12 +164,12 @@ function AddWindowMarker(lng, lat, content) {
 
     });
     map.addOverlay(marker);
-
+    Points.push(point);
 }
 
 //添加一个信息窗口
 
-function AddInfoWindow(lng, lat, content) {
+function map_api_AddInfoWindow(lng, lat, content) {
 
     var point = new BMap.Point(lng, lat);
 
@@ -212,7 +181,7 @@ function AddInfoWindow(lng, lat, content) {
 
 //添加一个标注
 
-function AddLabel(lng, lat, content) {
+function map_api_AddLabel(lng, lat, content) {
 
     var point = new BMap.Point(lng, lat);
 
@@ -220,6 +189,17 @@ function AddLabel(lng, lat, content) {
 
 }
 
+//用当前的markers构造一条线
+function map_api_BuildLine() {
+    var polyline = new BMap.Polyline(Points, lineStyleOptions);
+    map.addOverlay(polyline);
+    var startOption = { icon: new BMap.Icon("../../Content/images/map/marker_start.png", new BMap.Size(40, 40)) };
+    var endOption = { icon: new BMap.Icon("../../Content/images/map/marker_end.png", new BMap.Size(40, 40)) };
+    var startMarker = new BMap.Marker(Points[0], startOption);
+    var endMarker = new BMap.Marker(Points[Points.length-1], endOption);
+    map.addOverlay(startMarker);
+    map.addOverlay(endMarker);
+}
 //*
 
 //*结束*//
@@ -230,7 +210,7 @@ function AddLabel(lng, lat, content) {
 
 
 
-function GetInnerText() {
+function map_api_GetInnerText() {
 
     return document.getElementById("r-result").innerText;
 
@@ -238,7 +218,7 @@ function GetInnerText() {
 
 
 
-function Remove() {
+function map_api_Remove() {
 
     document.getElementById("r-result").innerText = "";
 
@@ -248,7 +228,7 @@ function Remove() {
 
 //返回指定坐标所在地址
 
-function GetByPoint(lng, lat) {
+function map_api_GetByPoint(lng, lat) {
 
     var gc = new BMap.Geocoder();
 
@@ -266,13 +246,13 @@ function GetByPoint(lng, lat) {
 
 //返回指定地址的坐标
 
-function GetByAddress(geo) {
+function map_api_GetByAddress(geo) {
 
     //通过IP定位获取当前城市名称
 
     IP();
 
-    var cityName = document.getElementById("geo").innerText
+    var cityName = document.getElementById("geo").innerText;
 
     var myGeo = new BMap.Geocoder();
 
@@ -298,13 +278,13 @@ function GetByAddress(geo) {
 
 //IP定位
 
-function IP() {
+function map_api_IP() {
 
     var myCity = new BMap.LocalCity();
 
     myCity.get(myFun);
 
-    function myFun(result) {
+    function map_api_myFun(result) {
 
         var cityName = result.name;
 
@@ -328,7 +308,7 @@ function IP() {
 
 //开启地图测距工具
 
-function DistanceToolOpen() {
+function map_api_DistanceToolOpen() {
 
     var distance = new BMapLib.DistanceTool(map);//测距组件
 
@@ -338,7 +318,7 @@ function DistanceToolOpen() {
 
 //关闭地图测距工具
 
-function DistanceToolOpen() {
+function map_api_DistanceToolOpen() {
 
     distance.close();
 
@@ -346,7 +326,7 @@ function DistanceToolOpen() {
 
 //开启地图拖拽放大工具
 
-function DragAndZoomOpen() {
+function map_api_DragAndZoomOpen() {
 
     var drag = new BMap.DragAndZoomTool(map);
 
@@ -356,7 +336,7 @@ function DragAndZoomOpen() {
 
 //关闭地图拖拽放大工具
 
-function DragAndZoomOpen() {
+function map_api_DragAndZoomOpen() {
 
     drag.close();
 
@@ -364,7 +344,7 @@ function DragAndZoomOpen() {
 
 //开启地图绘制工具
 
-function DrawingManagerOpen() {
+function map_api_DrawingManagerOpen() {
 
 
 
@@ -386,21 +366,26 @@ function DrawingManagerOpen() {
 
         },
 
-        circleOptions: styleOptions, //圆的样式
+        circleOptions: lineStyleOptions, //圆的样式
 
-        polylineOptions: styleOptions, //线的样式
+        polylineOptions: lineStyleOptions, //线的样式
 
-        polygonOptions: styleOptions, //多边形的样式
+        polygonOptions: lineStyleOptions, //多边形的样式
 
-        rectangleOptions: styleOptions //矩形的样式
+        rectangleOptions: lineStyleOptions //矩形的样式
 
     });
 
 }
 
+function map_api_Clear() {
+    Points = [];
+    Line = [];
+}
+
 //关闭地图绘制工具
 
-function DrawingManagerClose() {
+function map_api_DrawingManagerClose() {
 
     drawingManager.close();
 
