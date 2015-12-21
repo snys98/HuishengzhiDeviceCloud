@@ -15,7 +15,7 @@
                 var i = a[A];
                 if (t !== i && null !== i.x && null !== i.y) {
                     var z, l = t.x - i.x, B = t.y - i.y, n = l * l + B * B;
-                    n < i.max && (i === w && n >= i.max / 2 && (t.x -= 0.03 * l, t.y -= 0.03 * B), z = (i.max - n) / i.max,
+                    n < i.max && (i === w && n >= i.max / 2/* && (t.x -= 0.03 * l, t.y -= 0.03 * B)前面的条件决定鼠标是否吸附*/, z = (i.max - n) / i.max,
                         p.beginPath(), p.lineWidth = z / 2, p.strokeStyle = "rgba(0,0,0," + (z + 0.2) + ")",
                         p.moveTo(t.x, t.y), p.lineTo(i.x, i.y), p.stroke());
                 }
@@ -45,7 +45,9 @@
             max: 20000
         };
     window.onmousemove = function(a) {
-            a = a || window.event, w.x = a.clientX, w.y = a.clientY;
+        a = a || window.event,
+        w.x = a.clientX,
+        w.y = a.clientY;
         },
         window.onmouseout = function(a) {
             w.x = null, w.y = null;
@@ -54,7 +56,7 @@
             w.x = null, w.y = null;
         };
     //此处100为点数目
-    for (var j = [], s = 0; 100 > s; s++) {
+    for (var j = [], s = 0; 150 > s; s++) {
         var x = Math.random() * y.width, v = Math.random() * y.height, b = 2 * Math.random() - 1, k = 2 * Math.random() - 1;
         j.push({
             x: x,

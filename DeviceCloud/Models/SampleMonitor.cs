@@ -15,31 +15,31 @@ namespace DeviceCloud.Models
 {
     public class SampleMonitor
     {
-        public string SampleId { get; private set; }
         public string DeviceId { get; private set; }
 
         public List<TranLog> TransLogs { get; private set; }
 
-        public SampleMonitor(string sampleId, string deviceId)
-        {
-            SampleId = sampleId;
-            DeviceId = deviceId;
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("SampleMonitorConnectionString")))
-            {
-                TransLogs = con.Query<TranLog>(string.Format("SELECT * FROM dbo.TranLog WHERE TranId = '{0}' AND DeviceAddress = '{1}'", sampleId, deviceId)).ToList();
-            }
-            TransLogs.ConvertToBaiduCord();
-        }
+        //public SampleMonitor(string sampleId, string deviceId)
+        //{
+        //    SampleId = sampleId;
+        //    DeviceId = deviceId;
+        //    using (SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("SampleMonitorConnectionString")))
+        //    {
+        //        TransLogs = con.Query<TranLog>(string.Format("SELECT * FROM dbo.TranLog WHERE TranId = '{0}' AND DeviceAddress = '{1}'", sampleId, deviceId)).ToList();
+        //    }
+        //    TransLogs.ConvertToBaiduCord();
+        //}
 
         public SampleMonitor(DateTime startTime, DateTime endTime, string deviceId)
         {
+            DeviceId = deviceId;
             using (SqlConnection con = Db.Create())
             {
                 TransLogs =
                     con.Query<TranLog>(
                         string.Format(
                             "SELECT a.Longitude,a.Latitude,a.UploadTime,a.Humidity,a.Temperature FROM dbo.TranLog as a WHERE UploadTime>'{0}' and UploadTime<'{1}' AND DeviceAddress = '{2}' ORDER BY UploadTime",
-                            startTime.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), deviceId))
+                            startTime.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), DeviceId))
                         .ToList();
             }
             TransLogs.ConvertToBaiduCord();

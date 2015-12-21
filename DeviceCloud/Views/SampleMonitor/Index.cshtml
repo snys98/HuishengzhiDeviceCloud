@@ -7,7 +7,7 @@
 <div class="am-g am-g-fixed transmonitor-g-fixed">
     <div class="am-u-md-4">
         <div class="am-panel-group">
-            <section class="am-panel am-panel-primary">
+            @*<section class="am-panel am-panel-primary">
                 <div class="am-panel-hd">样本转运监控</div>
                 <div class="am-panel-bd">
                     <div class="am-form-inline">
@@ -17,11 +17,11 @@
                                 <option value="051201001">设备1</option>
                                 <option value="0">设备2</option>
                             </select>
-                            <button onclick="reloadDatas()" class="am-btn am-btn-success">确定</button>
+                            <button onclick="reloadDatas(document.getElementById('select-device').value)" class="am-btn am-btn-success">确定</button>
                         </fieldset>
                     </div>
                 </div>
-            </section>
+            </section>*@
             <section class="am-panel am-panel-primary">
                 <div class="am-panel-hd">详情</div>
 	            <div class="am-panel-bd am-g">
@@ -262,13 +262,13 @@
 			chart.setOption(chartOption);
 		};
 
-		function reloadDatas() {
+		function reloadDatas(deviceId,startTime,endTime) {
 			$.post("@Url.Action("GetSampleMonitor", "SampleMonitor")",
 				{
 					//起止时间需要从数据库里面根据当前设备绑定承运设备的时间起算
-					startTime: "20151217000000",
-					endTime: "20151218000000",
-					deviceId: document.getElementById("select-device").value
+					startTime: startTime,
+					endTime: endTime,
+					deviceId: deviceId
 				},
 				function(data, status) {
 					if (status == "success") {

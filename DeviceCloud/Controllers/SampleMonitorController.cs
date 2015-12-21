@@ -31,8 +31,8 @@ namespace DeviceCloud.Controllers
         public string GetSampleMonitor([FromBody]string startTime, [FromBody]string endTime, [FromBody]string deviceId)
         {
             var sampleMonitor = new SampleMonitor(
-                                    DateTime.ParseExact(startTime, "yyyyMMddHHmmss", null, DateTimeStyles.None),
-                                    DateTime.ParseExact(endTime, "yyyyMMddHHmmss", null, DateTimeStyles.None),
+                                    DateTime.ParseExact(startTime, "yyyy-MM-dd HH:mm:ss", null, DateTimeStyles.None),
+                                    DateTime.ParseExact(endTime==null?DateTime.Now.ToString():endTime, "yyyy-MM-dd HH:mm:ss", null, DateTimeStyles.None),
                                     deviceId);
             string result = JsonConvert.SerializeObject(sampleMonitor);
             return result;

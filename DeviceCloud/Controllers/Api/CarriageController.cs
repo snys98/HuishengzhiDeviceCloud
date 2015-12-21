@@ -27,8 +27,8 @@ namespace DeviceCloud.Controllers.Api
         {
             Dapper.DynamicParameters p = new Dapper.DynamicParameters();
             p.Add("@BarCode", BarCode);
-            var r = Db.QueryProc<CourierDevice>("Sp_QueryCourierForBarCode", p);
-            if (r.Count()== 0)
+            var r = Db.QueryProc<CourierDevice>("Sp_QueryCourierForBarCode", p);           
+            if (r.Count() == 0)
                 return new ApiResult<CourierDevice>(true, "不存在该承运人信息！");
             else
                 return new ApiResult<CourierDevice>(r.First());

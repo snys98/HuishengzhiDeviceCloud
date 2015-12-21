@@ -1,4 +1,12 @@
-﻿//*定义必要的公共变量
+﻿function DisableA() {
+
+    for (var i = 0; i < document.getElementsByTagName("a").length; i++) {
+
+        document.getElementsByTagName("a")[i].onclick = function () { return false }
+    }
+}
+
+//*定义必要的公共变量
 
 var distance;//测距对象
 
