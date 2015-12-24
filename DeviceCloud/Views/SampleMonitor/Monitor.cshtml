@@ -1,86 +1,46 @@
 ﻿@using System.Configuration
-@using DeviceCloud.Models
-@using DeviceLibrary
-@using Newtonsoft.Json
+@{
+    Layout = null;
+}
 
+<!DOCTYPE html>
 
-<div class="am-g am-g-fixed transmonitor-g-fixed" style="height: 100%;">
-	<div class="am-u-md-4">
-		<div class="am-panel-group">
-			@*<section class="am-panel am-panel-primary">
-					<div class="am-panel-hd">样本转运监控</div>
-					<div class="am-panel-bd">
-						<div class="am-form-inline">
-							<fieldset class="am-g">
-								<label for="select-device">选择设备: </label>
-								<select id="select-device" data-am-selected>
-									<option value="051201001">设备1</option>
-									<option value="0">设备2</option>
-								</select>
-								<button onclick="reloadDatas(document.getElementById('select-device').value)" class="am-btn am-btn-success">确定</button>
-							</fieldset>
-						</div>
-					</div>
-				</section>*@
-			<section class="am-panel am-panel-primary">
-				<div class="am-panel-hd">详情</div>
-				<div class="am-panel-bd am-g">
-					<div class="am-u-sm-8 am-center">
-						<span class="am-icon-user">  承运人:</span>
-						<span class="am-fr">周克华</span>
-					</div>
-					<div class="am-u-sm-12">
-						<table class="am-table am-table-bordered am-table-striped am-table-hover">
-							<thead>
-								<tr>
-									<th>样本ID</th>
-									<th>样本类型</th>
-									<th>创建时间</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>RX7989</td>
-									<td>T型病毒样本</td>
-									<td>2015-10-11</td>
-								</tr>
-								<tr>
-									<td>RX7988</td>
-									<td>T型病毒样本</td>
-									<td>2015-10-01</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</section>
-			<section class="am-panel am-panel-primary">
-				<div class="am-panel-hd">选项</div>
-				<div class="am-panel-bd">
-
-				</div>
-			</section>
-		</div>
-	</div>
-	<div class="am-u-md-8" style="height: 100%;">
-		<div class="am-panel-group" style="height: 90%;">
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>样本监控</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<link rel="alternate icon" type="image/png" href="~/Content/favicon.ico">
+	@Styles.Render("~/bundles/common-css")
+</head>
+<body>
+	<div class="am-g am-g-fixed transmonitor-g-fixed" style="height: 100%;">
+		<div class="am-panel-group" style="height: 98vh">
 			<section class="am-panel am-panel-primary" style="height: 50%;">
 				<div class="am-panel-hd">地图视图</div>
-				<div class="am-panel-bd" style="height: 100%; padding: 0;">
-					<div id="Bmap"></div>
+				<div class="am-panel-bd" style="padding: 0;height: 44.5vh;">
+					<div id="Bmap" style="height: 100%;"></div>
 				</div>
 			</section>
 			<section class="am-panel am-panel-primary" style="height: 50%;">
 				<div class="am-panel-hd">数据视图</div>
 				<div class="am-panel-bd" style="height: 100%">
-					<div id ="chart"></div>
+					<div id="chart" style="height: 100%;"></div>
 				</div>
 			</section>
 		</div>
 	</div>
-</div>
-@section CustomScripts
-{
+	<!--[if lt IE 9]>
+		@Scripts.Render("~/bundles/ie9-lt-js")
+	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+	<![endif]-->
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	@Scripts.Render("~/bundles/ie9-gt-js")
 	@*引入百度地图*@
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=@ConfigurationManager.AppSettings.Get("BaiduApiKey")"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/library/EventWrapper/1.2/src/EventWrapper.min.js"></script>
@@ -128,7 +88,7 @@
 			'echarts',
 			'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
 		],
-		function(ec) {
+		function (ec) {
 			// 基于准备好的dom，初始化echarts图表
 			chart = ec.init(document.getElementById('chart'), 'macarons');
 			chartOption = {
@@ -271,7 +231,7 @@
 		chart.resize();
 	}
 
-	function reloadDatas(deviceId,startTime,endTime) {
+	function reloadDatas(deviceId, startTime, endTime) {
 		$.post("@Url.Action("GetSampleMonitor", "SampleMonitor")",
 				{
 					//起止时间需要从数据库里面根据当前设备绑定承运设备的时间起算
@@ -279,7 +239,7 @@
 					endTime: endTime,
 					deviceId: deviceId
 				},
-				function(data, status) {
+				function (data, status) {
 					if (status == "success") {
 						locationInfos = data.TransLogs;
 						loadMarkers(locationInfos);
@@ -308,40 +268,5 @@
 
 		$(document).ready(init());
 	</script>
-}
-
-@section CustomStyle
-{
-    <style type="text/css">
-        @@media only screen and (min-width: 1200px) {
-            .transmonitor-g-fixed { max-width: 1200px; }
-        }
-
-        @@media only screen and (min-width: 641px) {
-            .transmonitor-sidebar {
-                font-size: 1.4rem;
-                padding-top: 20px;
-            }
-        }
-
-        #Bmap {
-            width: 100%;
-            height: 89.9%;
-        }
-
-        #chart {
-            width: 100%;
-            height: 100%;
-        }
-
-        .transmonitor-g-fixed { padding-top: 10px; }
-
-        body { height: 100vh }
-
-        footer {
-            bottom: 0;
-	        position: fixed;
-            width: 100vw;
-        }
-    </style>
-}
+</body>
+</html>

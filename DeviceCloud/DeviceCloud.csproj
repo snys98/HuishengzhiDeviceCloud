@@ -268,6 +268,7 @@
     <Content Include="Views\SampleMonitor\Index.cshtml" />
     <Content Include="Views\Shared\LoginModal.cshtml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
+    <Content Include="Views\SampleMonitor\Monitor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

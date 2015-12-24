@@ -7,8 +7,10 @@
 }
 
 //*定义必要的公共变量
+var siteRoot = "";
 
 var distance;//测距对象
+var Markers = [];//地图标注集合
 
 var Line;//路径对象
 var Points = [];//路径包含的点
@@ -28,7 +30,7 @@ fillColor: "blue",      //填充颜色。当参数为空时，圆形将没有填
 
 }
 
-var markerStyleOption = { icon: new BMap.Icon("../../Content/images/map/marker.png", new BMap.Size(20, 20)) };
+var markerStyleOption = { icon: new BMap.Icon(siteRoot + "Content/images/map/marker.png", new BMap.Size(20, 20)) };
 
 var drag;//拖框缩放对象
 
@@ -135,6 +137,7 @@ function map_api_AddNormalMarker(lng, lat) {
 
     map.addOverlay(marker);
     Points.push(point);
+    Markers.push(marker);
 }
 
 //添加动画标注
@@ -154,6 +157,7 @@ function map_api_AddLabelMarker(lng, lat, content) {
     marker.setLabel(label);
     map.addOverlay(marker);
     Points.push(point);
+    Markers.push(marker);
 }
 
 //添加包含一个信息窗口的标注
@@ -162,7 +166,7 @@ function map_api_AddWindowMarker(lng, lat, content) {
     var point = new BMap.Point(lng, lat);
     var marker = new BMap.Marker(point, markerStyleOption);  // 创建标注
 
-    marker.addEventListener("click", function () {
+    BMapLib.EventWrapper.addListener(marker, "click", function() {
 
         // 创建信息窗口对象
 
@@ -173,6 +177,7 @@ function map_api_AddWindowMarker(lng, lat, content) {
     });
     map.addOverlay(marker);
     Points.push(point);
+    Markers.push(marker);
 }
 
 //添加一个信息窗口
@@ -201,8 +206,8 @@ function map_api_AddLabel(lng, lat, content) {
 function map_api_BuildLine() {
     var polyline = new BMap.Polyline(Points, lineStyleOptions);
     map.addOverlay(polyline);
-    var startOption = { icon: new BMap.Icon("../../Content/images/map/marker_start.png", new BMap.Size(40, 40)) };
-    var endOption = { icon: new BMap.Icon("../../Content/images/map/marker_end.png", new BMap.Size(40, 40)) };
+    var startOption = { icon: new BMap.Icon(siteRoot + "Content/images/map/marker_start.png", new BMap.Size(20, 20)) };
+    var endOption = { icon: new BMap.Icon(siteRoot + "Content/images/map/marker_end.png", new BMap.Size(20, 20)) };
     var startMarker = new BMap.Marker(Points[0], startOption);
     var endMarker = new BMap.Marker(Points[Points.length-1], endOption);
     map.addOverlay(startMarker);
