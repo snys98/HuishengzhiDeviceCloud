@@ -18,19 +18,19 @@
 	<link rel="alternate icon" type="image/png" href="~/Content/favicon.ico">
 	@Styles.Render("~/bundles/common-css")
 </head>
-<body>
-	<div class="am-g am-g-fixed transmonitor-g-fixed" style="height: 100%;">
+<body style="overflow: hidden">
+	<div class="am-g am-g-fixed transmonitor-g-fixed" style="height: 100vh;">
 		<div class="am-panel-group" style="height: 98vh">
 			<section class="am-panel am-panel-primary" style="height: 50%;">
 				<div class="am-panel-hd">地图视图</div>
-				<div class="am-panel-bd" style="padding: 0;height: 44.5vh;">
+				<div class="am-panel-bd" style="padding: 0;height: 260px;">
 					<div id="Bmap" style="height: 100%;"></div>
 				</div>
 			</section>
 			<section class="am-panel am-panel-primary" style="height: 50%;">
 				<div class="am-panel-hd">数据视图</div>
 				<div class="am-panel-bd" style="height: 100%">
-					<div id="chart" style="height: 100%;"></div>
+					<div id="chart" style="height: 260px"></div>
 				</div>
 			</section>
 		</div>
@@ -215,7 +215,7 @@
 		for (var i = 0; i < transLogs.length; i++) {
 			tempratureDatas.push(transLogs[i].Temperature);
 			humidityDatas.push(transLogs[i].Humidity);
-			//replace只是为了美化时间显示
+			////replace只是为了美化时间显示
 			xAxisLables.push(transLogs[i].UploadTime.substring(5).replace("T", " "));
 		}
 		//温度
@@ -265,8 +265,6 @@
 				document.getElementsByTagName("a")[i].onclick = function () { return false }
 			}
 		}
-
-		$(document).ready(init());
 	</script>
 </body>
 </html>

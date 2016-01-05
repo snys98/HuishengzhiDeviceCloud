@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width" />
+    <title>慧生智管理后台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="alternate icon" type="image/png" href="~/Content/favicon.ico">
+    @Styles.Render("~/bundles/admin-css")
+    @Scripts.Render("~/bundles/admin-js")
+</head>
+<body>
+    <div class="header">
+        <div class="am-g">
+            <h1 style="width:100%; text-align:center;">慧生智管理后台</h1>
+        </div>
+        <hr />
+    </div>
+    <div class="am-g">
+        <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+            <h3>登录</h3>
+            <hr>            
+            <br>
+
+            <form method="post" class="am-form" action="@Url.Action("Login", "User", new { Area = "Admin" })">
+                <label for="email">账号:</label>
+                <input type="text" name="UserName" id="UserName" value="">
+                <br>
+                <label for="password">密码:</label>
+                <input type="password" name="Password" id="Password" value="">               
+                <br />
+                <div class="am-cf">
+                    <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+                    <input type="reset" name="" value="重置" class="am-btn am-btn-default am-btn-sm am-fr">
+                </div>
+                <br />
+                <label style="color:red;">@ViewBag.ErrorMessage</label>
+            </form>
+            <hr>
+            <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </div>
+    </div>
+</body>
+</html>
+

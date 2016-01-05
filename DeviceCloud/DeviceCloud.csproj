@@ -149,8 +149,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Common\AdminAuthorizeAttribute.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SpecTranController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Common\ApiErrorHandleAttribute.cs" />
+    <Compile Include="Common\ApiResultAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CarriageController.cs" />
+    <Compile Include="Controllers\Api\SpecTranController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SampleMonitorController.cs" />
@@ -158,13 +167,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin\SpecWaitDealModel.cs" />
+    <Compile Include="Models\Admin\SysUserModel.cs" />
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\Courier.cs" />
     <Compile Include="Models\CourierDevice.cs" />
     <Compile Include="Models\SampleMonitor.cs" />
+    <Compile Include="Models\SpecTran.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\css\admin.css" />
+    <Content Include="Content\Admin\js\app.js" />
+    <Content Include="Content\Admin\js\menus.js" />
+    <Content Include="Content\Admin\js\modernizr.js" />
+    <Content Include="Content\Admin\js\SpecTran\SpecTranWaitDispatch.js" />
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\amazeui.css" />
     <Content Include="Content\css\amazeui.flat.css" />
@@ -219,7 +236,12 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\google-maps.js" />
     <Content Include="Content\js\handlebars.min.js" />
-    <Content Include="Views\Shared\chart.vue" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SpecTran\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\Menus.cshtml" />
     <None Include="Content\js\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\js\jquery-1.8.2.js" />
     <Content Include="Content\js\jquery-1.8.2.min.js" />
@@ -272,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DeviceCloud.Models.Admin.SpecWaitDealModel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+<div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">样本转运</strong> / <small>待派工</small></div>
+</div>
+<hr>
+
+    <div class="am-g">
+        <div class="am-u-sm-6">
+            <button class="am-btn am-btn-success" type="submit" id="btndispatch">派工</button>
+        </div>
+        <form method="post" action="@Url.Action("Index","SpecTran",new{Area="Admin"})">
+            <div class="am-input-group am-u-sm-6">
+                <input type="text" class="am-form-field" id="OrgName" name="OrgName" value="@ViewBag.OrgName" />
+                <span class="am-input-group-btn">
+                    <button class="am-btn am-btn-default" type="submit">医院名称</button>
+                </span>
+            </div>
+        </form>
+</div>
+
+<br />
+<table class="am-table am-table-bordered am-table-striped am-table-hover">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="chkall">全选</th>
+            <th>转出医院</th>
+            <th>转出科室</th>
+            <th>样本类型</th>
+            <th>检验项目</th>
+            <th>样本条码</th>
+            <th>提交时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{foreach (var m in Model)
+        {
+            <tr >
+                <td><input type="checkbox" id="chk_@m.BarCode" val="@m.BarCode" orgname="@m.PreOrgName"></td>
+                <td>@m.PreOrgName</td>
+                <td>@m.PreDepName</td>
+                <td>@m.SpecimenTypeName</td>
+                <td>@m.ItemNames</td>
+                <td>@m.BarCode</td>
+                <td>@m.PostTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+<div class="am-g">
+    <label class="am-u-sm-2" style=" padding-top:15px;">总记录数:@ViewBag.RecordCount 条</label>
+    <ul class="am-pagination am-pagination-right am-u-sm-10">
+        <li class="am-disabled"><a href="#">&laquo;</a></li>
+        @{
+            for (var i = 0; i < ViewBag.PageCount; i++)
+            {
+                if (i == ViewBag.PageIndex)
+                {
+                    <li class="am-active"><a href="#">@(i + 1)</a></li>
+                }
+                else
+                {
+                    <li><a href="#">@(i + 1)</a></li>
+                }
+            }
+        }
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Content/Admin/Js/SpecTran/SpecTranWaitDispatch.js")"></script>

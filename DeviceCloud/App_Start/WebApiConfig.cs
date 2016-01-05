@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeviceCloud.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -14,6 +15,8 @@ namespace DeviceCloud
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
               new QueryStringMapping("datatype", "json", "application/json"));
 
+            config.Filters.Add(new ApiResultAttribute());
+            config.Filters.Add(new ApiErrorHandleAttribute());
             // Web API 路由
             config.MapHttpAttributeRoutes();
             //新加的规则  

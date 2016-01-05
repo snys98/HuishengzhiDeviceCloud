@@ -42,6 +42,15 @@ namespace DeviceCloud
             }
         }
 
+        public static int ExeProc<T>(string procName, T parameters)
+        {
+            using (SqlConnection con = Db.Create())
+            {
+                con.Open();
+                return con.Execute(procName, parameters, null, null, CommandType.StoredProcedure);
+            }
+        }
+
         public static IEnumerable<T> QueryProc<T>(string procName,Dapper.DynamicParameters parameters= null)
         {
             using (SqlConnection con = Db.Create())
@@ -50,5 +59,6 @@ namespace DeviceCloud
                 return con.Query<T>(procName, parameters, null, true, null, CommandType.StoredProcedure);
             }
         }
+
     }
 }

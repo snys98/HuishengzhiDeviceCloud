@@ -23,21 +23,15 @@ namespace DeviceCloud.Controllers.Api
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ApiResult<CourierDevice> Get(string BarCode)
+        public CourierDevice Get(string BarCode)
         {
             Dapper.DynamicParameters p = new Dapper.DynamicParameters();
             p.Add("@BarCode", BarCode);
-            var r = Db.QueryProc<CourierDevice>("Sp_QueryCourierForBarCode", p);           
+            var r = Db.QueryProc<CourierDevice>("Sp_QueryCourierForBarCode", p);
             if (r.Count() == 0)
-                return new ApiResult<CourierDevice>(true, "不存在该承运人信息！");
+                throw new Exception("不存在该承运人信息！");
             else
-                return new ApiResult<CourierDevice>(r.First());
+                return r.First();
         }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
     }
 }

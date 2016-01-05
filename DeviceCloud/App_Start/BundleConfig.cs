@@ -32,6 +32,18 @@ namespace DeviceCloud
                 "~/Content/js/jquery-1.8.2.js",
                 "~/Content/js/amazeui.ie8polyfill.js",
                 "~/Content/js/vue.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/admin-css").Include(
+                     "~/Content/css/amazeui.css",
+                     "~/Content/Admin/css/admin.css"                     
+                     ));
+             bundles.Add(new StyleBundle("~/bundles/admin-js").Include(
+                      "~/Content/Admin/js/app.js",
+                     "~/Content/js/jquery-1.8.2.js",
+                     "~/Content/js/amazeui.js",
+                      "~/Content/Admin/js/modernizr.js"
+                     ));
+           
         }
     }
 }

@@ -2,7 +2,7 @@
 IF NOT  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TransDevice]') AND type in (N'U'))
 BEGIN
 	CREATE TABLE [dbo].[TransDevice](
-	[DeviceId] [nchar](30) NOT NULL,
+	[DeviceId] [nvarchar](30) NOT NULL,
 	[DeviceName] [nvarchar](50) NULL,
 	PRIMARY KEY CLUSTERED 
 	(

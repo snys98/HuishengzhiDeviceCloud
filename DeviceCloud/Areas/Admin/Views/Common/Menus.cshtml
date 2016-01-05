@@ -1,0 +1,123 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+    <div class="am-offcanvas-bar admin-offcanvas-bar">
+        <ul class="am-list admin-sidebar-list">
+            <li>
+                <a href="@Url.Action("Index","Home",new{Area="Admin"})">
+                    <span class="am-icon-home"></span>
+                    首页
+                </a>
+            </li>
+            <li class="admin-parent">
+                <a class="am-cf" data-am-collapse="{target: '#collapse-tran'}">
+                    <span class="am-icon-file"></span> 样本转运 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+                <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-tran">
+                    <li>
+                        <a id="spectran_waitdeal" class="am-cf"
+                           href="@Url.Action("Index","SpecTran",new{Area="Admin"})">
+                            <span class="am-icon-check"></span>
+                            待派工
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://amazeui.org/examples/admin-help.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            转运中
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://amazeui.org/examples/admin-gallery.html">
+                            <span class="am-icon-th"></span>
+                            转运历史
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="am-cf" data-am-collapse="{target: '#collapse-transet'}">
+                    <span class="am-icon-file"></span> 转运设置 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+                <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-transet">
+                    <li>
+                        <a class="am-cf"
+                           href="http://amazeui.org/examples/admin-user.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            转运设备
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://amazeui.org/examples/admin-help.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            转运人员
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://amazeui.org/examples/admin-gallery.html">
+                            <span class="am-icon-th"></span>
+                            人员设备
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="am-cf" data-am-collapse="{target: '#collapse-message'}">
+                    <span class="am-icon-file"></span> 消息设置 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+                <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-message">
+                    <li>
+                        <a class="am-cf"
+                           href="http://amazeui.org/examples/admin-user.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            微信设置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://amazeui.org/examples/admin-help.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            短信设置
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="am-cf" data-am-collapse="{target: '#collapse-web'}">
+                    <span class="am-icon-file"></span> 网站设置 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                </a>
+                <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-web">
+                    <li>
+                        <a class="am-cf"
+                           href="http://amazeui.org/examples/admin-user.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            网站内容
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://amazeui.org/examples/admin-help.html">
+                            <span class="am-icon-puzzle-piece"></span>
+                            网站新闻
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="am-panel am-panel-default admin-sidebar-panel">
+            <div class="am-panel-bd">
+                <p><span class="am-icon-bookmark"></span> 公告</p>
+                <p>转运样本申请记录必须在20分钟内处理完成。—— 慧生智</p>
+            </div>
+        </div>
+        <div class="am-panel am-panel-default admin-sidebar-panel">
+            <div class="am-panel-bd">
+                <p><span class="am-icon-tag"></span> 动态</p>
+                <p>最新消息动态</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="@Url.Content("~/Content/Admin/js/menus.js")"></script>
