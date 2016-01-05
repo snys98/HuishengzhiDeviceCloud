@@ -15,7 +15,7 @@
 			</section>*@
             <section class="am-panel am-panel-primary">
                 <div class="am-panel-hd">详情</div>
-                <div style="overflow: scroll; overflow-x: hidden; height: 90%;">
+                <div style="overflow: scroll; overflow-x: hidden; height: 90%;max-height:80vh">
                     <div class="am-panel-bd am-g">
                         <div class="am-u-sm-8 am-u-end">
                             <span class="am-icon-user">  承运人:</span>
@@ -71,7 +71,10 @@
             </section>
             <section class="am-panel am-panel-primary" style="height: 50%;">
                 <div class="am-panel-hd">数据视图</div>
-                <div id="chart" class="am-panel-bd" style="height: 100%"></div>
+                <div class="am-panel-bd" style="height: 100%">
+                    <div id="chart" class="am-u-sm-8"></div>
+                    <div id="curInfo" class="am-u-sm-4"></div>
+                </div>
             </section>
         </div>
     </div>
@@ -135,6 +138,10 @@
                     },
                     legend: {
                         data: ['温度(℃)', '湿度(%)'],
+                        selectedMode: 'single',
+                        selected: {
+                            '湿度(%)': false
+                        },
                     },
                     xAxis: [
                         {
@@ -223,7 +230,7 @@
                                 clickable: false,
                             },
                             symbol: 'none',
-                            showAllSymbol: true,
+                            legendHoverLink:false
                         },
                         {
                             name: "湿度(%)",
@@ -274,14 +281,7 @@
                                                 color: '#CC66CC'
                                             },
                                             emphasis: {
-                                                color: '#CC99CC',
-                                                label: {
-                                                    show: true,
-                                                    position: 'inside',
-                                                    textStyle: {
-                                                        fontSize: '12'
-                                                    }
-                                                }
+                                                color: '#CC99CC'
                                             }
                                         }
                                     },
@@ -293,14 +293,7 @@
                                                 color: '#99CCFF'
                                             },
                                             emphasis: {
-                                                color: '#9999FF',
-                                                label: {
-                                                    show: true,
-                                                    position: 'inside',
-                                                    textStyle: {
-                                                        fontSize: '12'
-                                                    }
-                                                }
+                                                color: '#9999FF'
                                             }
                                         }
                                     }
@@ -308,36 +301,37 @@
                                 clickable: false,
                             },
                             symbol: 'none',
-                            showAllSymbol: true,
+                            legendHoverLink: false
                         }
                     ]
                 }
             }
         );
-        var ecConfig = require('echarts/config');
+        //TODO:动态添加数据
+        //clearInterval(timeTicket);
+        //timeTicket = setInterval(function () {
+        //    lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
+        //    lastData = lastData.toFixed(1) - 0;
+        //    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
-        function toggleChart(param) {
-            console.log(param);
-            switch (param.target) {
-                case '温度(℃)':
-                    chartOption.legend.selected = {
-                        '温度(℃)': true,
-                        '湿度(%)': false
-                    }
-                    break;
-                case '湿度(%)':
-                    chartOption.legend.selected = {
-                        '温度(℃)': false,
-                        '湿度(%)': true
-                    }
-                    break;
-            }
-            chart.setOption(chartOption);
-            if (param.type == "click" && typeof param.seriesIndex != 'undefined') {
-                map_api_PanTo(sampleMonitorData.TransLogs[param.dataIndex].Longitude, sampleMonitorData.TransLogs[param.dataIndex].Latitude);
-                BMapLib.EventWrapper.trigger(Markers[param.dataIndex], 'click', { 'type': 'onclick', target: Markers[param.dataIndex] });
-            }
-        }
+        //    // 动态数据接口 addData
+        //    myChart.addData([
+        //        [
+        //            0,        // 系列索引
+        //            Math.round(Math.random() * 1000), // 新增数据
+        //            true,     // 新增数据是否从队列头部插入
+        //            false     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+        //        ],
+        //        [
+        //            1,        // 系列索引
+        //            lastData, // 新增数据
+        //            false,    // 新增数据是否从队列头部插入
+        //            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+        //            axisData  // 坐标轴标签
+        //        ]
+        //    ]);
+        //}, 2100);
+        var ecConfig = require('echarts/config');
 
         function locateMarker(param) {
             //var mes = '【' + param.type + '】';
@@ -398,7 +392,6 @@
             //X轴时间
             chartOption.xAxis[0].data = xAxisLables;
             chart.on(ecConfig.EVENT.CLICK, locateMarker);
-            chart.on(ecConfig.EVENT.LEGEND_SELECTED, toggleChart);
             chart.setOption(chartOption);
         };
 

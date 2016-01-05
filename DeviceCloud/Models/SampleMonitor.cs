@@ -53,7 +53,7 @@ namespace DeviceCloud.Models
     public static class SampleMonitorExtentions
     {
         /// <summary>
-        /// 将转运记录(集合)的坐标系转换到百度坐标,Todo:坐标转换后位置不准&网络访问性能优化和服务器cpu性能优化哪个重要
+        /// 将转运记录(集合)的坐标系转换到百度坐标,Todo:以后可能把坐标转换的工作交给客户端完成
         /// </summary>
         /// <param name="tranLogs"></param>
         public static void ConvertToBaiduCord(this List<TranLog> tranLogs)

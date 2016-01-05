@@ -41,5 +41,6 @@ namespace DeviceCloud.Controllers
             string result = JsonConvert.SerializeObject(sampleMonitor);
             return result;
         }
+        //Todo:实现动态添加数据的接口
     }
 }
