@@ -16,9 +16,10 @@ namespace DeviceCloud.Models
     public class SampleMonitor
     {
         public string DeviceId { get; private set; }
+        public string TransId { get; private set; }
         public Courier Courier { get; private set; }
 
-        public List<TranLog> TransLogs { get; private set; }
+        public List<TranLog> TranLogs { get; private set; }
 
         //public SampleMonitor(string sampleId, string deviceId)
         //{
@@ -41,12 +42,26 @@ namespace DeviceCloud.Models
                 parameters.Add("@StartTime", startTime);
                 parameters.Add("@EndTime", endTime);
                 parameters.Add("@DeviceId", deviceId);
-                TransLogs = Db.QueryProc<TranLog>("Sp_QueryTransLogs", parameters).ToList();
+                TranLogs = Db.QueryProc<TranLog>("Sp_QueryTranLogsByTimeAndDeviceId", parameters).ToList();
                 parameters = new Dapper.DynamicParameters();
                 parameters.Add("@DeviceId", deviceId);
                 Courier = Db.QueryProc<Courier>("Sp_QueryCourierByDeviceId", parameters).First();
             }
-            TransLogs.ConvertToBaiduCord();
+            TranLogs.ConvertToBaiduCord();
+        }
+
+        public SampleMonitor(string tranId)
+        {
+
+            TransId = tranId;
+            using (SqlConnection con = Db.Create())
+            {
+                Dapper.DynamicParameters parameters = new Dapper.DynamicParameters();
+                parameters.Add("@TranId", tranId);
+                TranLogs = Db.QueryProc<TranLog>("Sp_QueryTranLogsByTranId", parameters).ToList();
+                Courier = Db.QueryProc<Courier>("Sp_QueryCourierByTranId", parameters).First();
+            }
+            TranLogs.ConvertToBaiduCord();
         }
     }
 

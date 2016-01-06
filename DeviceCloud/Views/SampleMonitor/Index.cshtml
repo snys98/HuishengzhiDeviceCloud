@@ -4,7 +4,7 @@
 @using Newtonsoft.Json
 
 
-<div class="am-g am-g-fixed transmonitor-g-fixed" style="height: 100%;">
+<div class="am-g am-g-fixed tranmonitor-g-fixed" style="height: 100%;">
     <div class="am-u-md-4" style="height: 100%;">
         <div class="am-panel-group" style="height: 90%;">
             @*<section class="am-panel am-panel-primary">
@@ -344,25 +344,25 @@
             //}
             console.log(param);
             if (param.type == "click" && typeof param.seriesIndex != 'undefined') {
-                map_api_PanTo(sampleMonitorData.TransLogs[param.dataIndex].Longitude, sampleMonitorData.TransLogs[param.dataIndex].Latitude);
+                map_api_PanTo(sampleMonitorData.TranLogs[param.dataIndex].Longitude, sampleMonitorData.TranLogs[param.dataIndex].Latitude);
                 BMapLib.EventWrapper.trigger(Markers[param.dataIndex], 'click', { 'type': 'onclick', target: Markers[param.dataIndex] });
             }
         }
 
         //建立marker内容
-        function buildMarkerContent(transLog) {
+        function buildMarkerContent(tranLog) {
             var html = "<div>";
-            html += "<p>温度: " + transLog.Temperature + " ℃<p>";
-            html += "<p>湿度: " + transLog.Humidity + " %<p>";
+            html += "<p>温度: " + tranLog.Temperature + " ℃<p>";
+            html += "<p>湿度: " + tranLog.Humidity + " %<p>";
             html += "</div>";
             return html;
         }
 
         //初始化所有点位置,时间格式:yyyyMMddHHmmss
-        function loadMarkers(transLogs) {
+        function loadMarkers(tranLogs) {
             init();
-            for (var i = 0; i < transLogs.length; i++) {
-                map_api_AddWindowMarker(transLogs[i].Longitude, transLogs[i].Latitude, buildMarkerContent(transLogs[i]));
+            for (var i = 0; i < tranLogs.length; i++) {
+                map_api_AddWindowMarker(tranLogs[i].Longitude, tranLogs[i].Latitude, buildMarkerContent(tranLogs[i]));
             }
             map_api_BuildLine();
             @*var content;
@@ -375,15 +375,15 @@
                 }*@
         };
 
-        function loadChart(transLogs) {
+        function loadChart(tranLogs) {
             var tempratureDatas = [];
             var humidityDatas = [];
             var xAxisLables = [];
-            for (var i = 0; i < transLogs.length; i++) {
-                tempratureDatas.push(transLogs[i].Temperature);
-                humidityDatas.push(transLogs[i].Humidity);
+            for (var i = 0; i < tranLogs.length; i++) {
+                tempratureDatas.push(tranLogs[i].Temperature);
+                humidityDatas.push(tranLogs[i].Humidity);
                 //replace只是为了美化时间显示
-                xAxisLables.push(transLogs[i].UploadTime.substring(5).replace("T", " "));
+                xAxisLables.push(tranLogs[i].UploadTime.substring(5).replace("T", " "));
             }
             //温度
             chartOption.series[0].data = tempratureDatas;
@@ -396,11 +396,11 @@
         };
 
         function loadTable(sampleMonitorData) {
-            var transLogs = sampleMonitorData.TransLogs;
-            for (var i = 0; i < transLogs.length; i++) {
-                $('#tb-body').append("<tr><td>" + transLogs[i].Temperature + "</td>" +
-                    "<td>" + transLogs[i].Humidity + "</td>" +
-                    "<td>" + transLogs[i].UploadTime.substring(5).replace("T", " ") + "</td></tr>");
+            var tranLogs = sampleMonitorData.TranLogs;
+            for (var i = 0; i < tranLogs.length; i++) {
+                $('#tb-body').append("<tr><td>" + tranLogs[i].Temperature + "</td>" +
+                    "<td>" + tranLogs[i].Humidity + "</td>" +
+                    "<td>" + tranLogs[i].UploadTime.substring(5).replace("T", " ") + "</td></tr>");
             }
             $('#tb-courierName').html(sampleMonitorData.Courier.Name);
         }
@@ -409,20 +409,17 @@
             chart.resize();
         }
 
-        //reloadDatas("051201001","2015-12-21 00:00:00","2015-12-25 00:00:00")
-        function reloadDatas(deviceId, startTime, endTime) {
-            $.post("@Url.Action("GetSampleMonitor", "SampleMonitor")",
+        //reloadDatas("cb45e2aa-c58e-40de-9152-63ff2d055038")
+        function reloadDatas(tranId) {
+            $.post("@Url.Action("GetSampleMonitorByTranId", "SampleMonitor")",
                 {
-                    //起止时间需要从数据库里面根据当前设备绑定承运设备的时间起算
-                    startTime: startTime,
-                    endTime: endTime,
-                    deviceId: deviceId
+                    tranId: tranId,
                 },
                 function(data, status) {
                     if (status == "success") {
                         sampleMonitorData = data;
-                        loadMarkers(sampleMonitorData.TransLogs);
-                        loadChart(sampleMonitorData.TransLogs);
+                        loadMarkers(sampleMonitorData.TranLogs);
+                        loadChart(sampleMonitorData.TranLogs);
                         loadTable(sampleMonitorData);
                     }
                 }, "json");
@@ -454,11 +451,11 @@
 {
     <style type="text/css">
         @@media only screen and (min-width: 1200px) {
-            .transmonitor-g-fixed { max-width: 1200px; }
+            .tranmonitor-g-fixed { max-width: 1200px; }
         }
 
         @@media only screen and (min-width: 641px) {
-            .transmonitor-sidebar {
+            .tranmonitor-sidebar {
                 font-size: 1.4rem;
                 padding-top: 20px;
             }
@@ -474,7 +471,7 @@
             height: 100%;
         }
 
-        .transmonitor-g-fixed { padding-top: 10px; }
+        .tranmonitor-g-fixed { padding-top: 10px; }
 
         body { height: 100vh }
 

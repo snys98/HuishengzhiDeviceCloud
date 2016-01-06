@@ -5,7 +5,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Tr
 BEGIN
 	 CREATE TABLE [dbo].[TranLog](
 		[Id] [uniqueidentifier] NOT NULL,
-		[TranId] [varchar](50) NOT NULL,
+		[TranId] [uniqueidentifier] NOT NULL,
 		[DataLength] [int] NOT NULL,
 		[ProtocolVersion] [int] NOT NULL,
 		[UploadInterval] [int] NOT NULL,

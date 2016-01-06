@@ -25,14 +25,14 @@ namespace DeviceCloud.Controllers
             return View();
         }
         /// <summary>
-        /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据
+        /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据,根据设备id和起止时间
         /// </summary>
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <param name="deviceId"></param>
         /// <returns></returns>
         [System.Web.Mvc.HttpPost]
-        public string GetSampleMonitor([FromBody]string startTime, [FromBody]string endTime, [FromBody]string deviceId)
+        public string GetSampleMonitorByTimeAndDeviceId([FromBody]string startTime, [FromBody]string endTime, [FromBody]string deviceId)
         {
             var sampleMonitor = new SampleMonitor(
                                     DateTime.ParseExact(startTime, "yyyy-MM-dd HH:mm:ss", null, DateTimeStyles.None),
@@ -41,6 +41,29 @@ namespace DeviceCloud.Controllers
             string result = JsonConvert.SerializeObject(sampleMonitor);
             return result;
         }
+        /// <summary>
+        /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据,根据转运记录的ID
+        /// </summary>
+        /// <param name="tranId"></param>
+        /// <returns></returns>
+        [System.Web.Mvc.HttpPost]
+        public string GetSampleMonitorByTranId([FromBody]string tranId)
+        {
+            var sampleMonitor = new SampleMonitor(tranId);
+            string result = JsonConvert.SerializeObject(sampleMonitor);
+            return result;
+        }
         //Todo:实现动态添加数据的接口
+        /// <summary>
+        /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据,根据转运记录的ID
+        /// </summary>
+        /// <param name="tranId"></param>
+        /// <param name="lastUpdateTime">上次更新的时间</param>
+        /// <returns></returns>
+        [System.Web.Mvc.HttpPost]
+        public string GetNewData([FromBody]string tranId,[FromBody]string lastUpdateTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
