@@ -25,7 +25,7 @@ namespace DeviceCloud.Common
             };
 
             // 重新打包回传的讯息
-            actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(result.Status, result);
+            actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
     }

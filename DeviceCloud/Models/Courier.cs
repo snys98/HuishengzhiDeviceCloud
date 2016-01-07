@@ -6,7 +6,7 @@ using System.Web;
 namespace DeviceCloud.Models
 {
     public class Courier
-    {
+    {        
         public int CourierId { get; set; }
         public string BarCode { get; set; }
         public string Name { get; set; }

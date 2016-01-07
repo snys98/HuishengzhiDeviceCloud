@@ -18,14 +18,16 @@ GO
 -- Description:	根据条码获取承运人信息
 -- =============================================
 CREATE PROCEDURE [dbo].[Sp_QueryCourierForBarCode]
-	@BarCode NVARCHAR(50)
+	@BarCode NVARCHAR(50),
+	@OrgName NVARCHAR(100) --医院
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT a.*,c.* FROM dbo.Courier a
+	SELECT a.*,c.*,b.Id AS DeviceCourierID,d.TranID FROM dbo.Courier a
 		INNER JOIN dbo.TransDeviceCourierRef b  ON b.CourierId = a.CourierId
 		INNER JOIN dbo.TransDevice c ON c.DeviceId=b.TransDeviceId
-	WHERE a.BarCode=@BarCode
+		INNER JOIN dbo.Trans d ON b.Id=d.DeviceCourierID AND d.OutHospName=@OrgName AND d.[Status]=1
+	WHERE a.BarCode LIKE @BarCode 
 END
 
 GO

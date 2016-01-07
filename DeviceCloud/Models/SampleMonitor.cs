@@ -42,7 +42,7 @@ namespace DeviceCloud.Models
                 parameters.Add("@StartTime", startTime);
                 parameters.Add("@EndTime", endTime);
                 parameters.Add("@DeviceId", deviceId);
-                TranLogs = Db.QueryProc<TranLog>("Sp_QueryTranLogsByTimeAndDeviceId", parameters).ToList();
+                TranLogs = Db.QueryProc<TranLog>("Sp_QueryFineTranLogsByTimeAndDeviceId", parameters).ToList();
                 parameters = new Dapper.DynamicParameters();
                 parameters.Add("@DeviceId", deviceId);
                 Courier = Db.QueryProc<Courier>("Sp_QueryCourierByDeviceId", parameters).First();
@@ -58,7 +58,7 @@ namespace DeviceCloud.Models
             {
                 Dapper.DynamicParameters parameters = new Dapper.DynamicParameters();
                 parameters.Add("@TranId", tranId);
-                TranLogs = Db.QueryProc<TranLog>("Sp_QueryTranLogsByTranId", parameters).ToList();
+                TranLogs = Db.QueryProc<TranLog>("Sp_QueryFineTranLogsByTranId", parameters).ToList();
                 Courier = Db.QueryProc<Courier>("Sp_QueryCourierByTranId", parameters).First();
             }
             TranLogs.ConvertToBaiduCord();

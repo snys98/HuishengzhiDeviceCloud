@@ -30,7 +30,23 @@ fillColor: "blue",      //填充颜色。当参数为空时，圆形将没有填
 
 }
 
-var markerStyleOption = { icon: new BMap.Icon(siteRoot + "Content/images/map/marker.png", new BMap.Size(20, 20)) };
+function getMarkerStyleOption(index, count) {
+    var size = new BMap.Size(20, 20);
+    var iconUrl;
+    switch (index) {
+        case 0:
+            iconUrl = siteRoot + "Content/images/map/marker_start.png";
+            break;
+        case (count-1):
+            iconUrl = siteRoot + "Content/images/map/marker_end.png";
+            break;
+        default :
+            iconUrl = siteRoot + "Content/images/map/marker.png";
+            break;
+    }
+    return { icon: new BMap.Icon(iconUrl, size) };
+};
+//{ icon: new BMap.Icon(siteRoot + "Content/images/map/marker.png", new BMap.Size(20, 20)) };
 
 var drag;//拖框缩放对象
 
@@ -162,9 +178,9 @@ function map_api_AddLabelMarker(lng, lat, content) {
 
 //添加包含一个信息窗口的标注
 
-function map_api_AddWindowMarker(lng, lat, content) {
+function map_api_AddWindowMarker(lng, lat, content,index,count) {
     var point = new BMap.Point(lng, lat);
-    var marker = new BMap.Marker(point, markerStyleOption);  // 创建标注
+    var marker = new BMap.Marker(point, getMarkerStyleOption(index, count));  // 创建标注
 
     BMapLib.EventWrapper.addListener(marker, "click", function() {
 
@@ -206,12 +222,6 @@ function map_api_AddLabel(lng, lat, content) {
 function map_api_BuildLine() {
     var polyline = new BMap.Polyline(Points, lineStyleOptions);
     map.addOverlay(polyline);
-    var startOption = { icon: new BMap.Icon(siteRoot + "Content/images/map/marker_start.png", new BMap.Size(20, 20)) };
-    var endOption = { icon: new BMap.Icon(siteRoot + "Content/images/map/marker_end.png", new BMap.Size(20, 20)) };
-    var startMarker = new BMap.Marker(Points[0], startOption);
-    var endMarker = new BMap.Marker(Points[Points.length-1], endOption);
-    map.addOverlay(startMarker);
-    map.addOverlay(endMarker);
 }
 //*
 
@@ -394,6 +404,7 @@ function map_api_DrawingManagerOpen() {
 function map_api_Clear() {
     Points = [];
     Line = [];
+    map.clearOverlays();
 }
 
 //关闭地图绘制工具

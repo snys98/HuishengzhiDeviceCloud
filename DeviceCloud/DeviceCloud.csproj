@@ -157,6 +157,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Common\ApiErrorHandleAttribute.cs" />
     <Compile Include="Common\ApiResultAttribute.cs" />
+    <Compile Include="Common\Config.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CarriageController.cs" />
     <Compile Include="Controllers\Api\SpecTranController.cs" />
@@ -174,7 +175,10 @@
     <Compile Include="Models\CourierDevice.cs" />
     <Compile Include="Models\SampleMonitor.cs" />
     <Compile Include="Models\SpecTran.cs" />
+    <Compile Include="Models\Trans.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\CourierProvder.cs" />
+    <Compile Include="Provider\SpectranProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\css\admin.css" />

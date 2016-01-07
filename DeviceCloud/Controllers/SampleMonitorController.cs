@@ -13,10 +13,11 @@ namespace DeviceCloud.Controllers
     public class SampleMonitorController : Controller
     {
         // GET: SampleMonitor
-        public ActionResult Index()
+        public ActionResult Index(string tranId)
         {
             //var sampleMonitor = new SampleMonitor(sampleId,deviceId);
             ViewBag.NavId = "nav-item-monitor";
+            ViewBag.TranId = tranId;
             return View();
         }
 
@@ -41,6 +42,7 @@ namespace DeviceCloud.Controllers
             string result = JsonConvert.SerializeObject(sampleMonitor);
             return result;
         }
+
         /// <summary>
         /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据,根据转运记录的ID
         /// </summary>
@@ -52,18 +54,6 @@ namespace DeviceCloud.Controllers
             var sampleMonitor = new SampleMonitor(tranId);
             string result = JsonConvert.SerializeObject(sampleMonitor);
             return result;
-        }
-        //Todo:实现动态添加数据的接口
-        /// <summary>
-        /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据,根据转运记录的ID
-        /// </summary>
-        /// <param name="tranId"></param>
-        /// <param name="lastUpdateTime">上次更新的时间</param>
-        /// <returns></returns>
-        [System.Web.Mvc.HttpPost]
-        public string GetNewData([FromBody]string tranId,[FromBody]string lastUpdateTime)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DeviceCloud.Models;
+using DeviceCloud.Provider;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,14 +34,14 @@ namespace DeviceCloud.Controllers.Api
             {
                 throw new Exception("提交数据格式错误");
             }
-
-            var r = Db.ExeProc<SpecTran>("Sp_PostSpecTran", value);
-            return r;
+            return new SpectranProvider().Save(value);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]string json)
         {
+            Trans model = JsonConvert.DeserializeObject<Trans>(json);
+            new SpectranProvider().SpecTranOut(model);
         }
 
         // DELETE api/<controller>/5

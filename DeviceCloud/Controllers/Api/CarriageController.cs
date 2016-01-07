@@ -1,4 +1,5 @@
 ﻿using DeviceCloud.Models;
+using DeviceCloud.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,11 @@ namespace DeviceCloud.Controllers.Api
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public CourierDevice Get(string BarCode)
+        public CourierDevice Get(string BarCode, string OrgName)
         {
-            Dapper.DynamicParameters p = new Dapper.DynamicParameters();
-            p.Add("@BarCode", BarCode);
-            var r = Db.QueryProc<CourierDevice>("Sp_QueryCourierForBarCode", p);
+            var r = new CourierProvder().Query(BarCode, OrgName);
             if (r.Count() == 0)
-                throw new Exception("不存在该承运人信息！");
+                throw new Exception("不存在该承运人信息或没有该承运人的派工单！");
             else
                 return r.First();
         }

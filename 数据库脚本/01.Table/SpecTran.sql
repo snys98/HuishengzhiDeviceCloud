@@ -10,7 +10,7 @@ BEGIN
 		[Age] [numeric](5, 2) NOT NULL,
 		[Nationality] [nvarchar](12) NOT NULL,
 		[Name] [nvarchar](40) NOT NULL,
-		[Residence] [nvarchar](50) NOT NULL,
+		[Residence] [nvarchar](50) NULL,
 		[Price] [numeric](8, 2) NOT NULL,
 		[CurDisease] [nvarchar](200) NOT NULL,
 		[PreOrgName] [nvarchar](50) NOT NULL,

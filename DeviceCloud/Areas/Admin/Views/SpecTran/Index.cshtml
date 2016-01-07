@@ -7,18 +7,27 @@
 </div>
 <hr>
 
-    <div class="am-g">
-        <div class="am-u-sm-6">
-            <button class="am-btn am-btn-success" type="submit" id="btndispatch">派工</button>
+<div class="am-g">
+    <div class="am-u-sm-6">
+        <button class="am-btn am-btn-success" type="submit" id="btndispatch">派工</button>
+        <select id="carriage">
+            <option value="" class="">--承运人--</option>
+            @foreach (var item in ViewBag.Carriage)
+            {
+                <option value="@item.DeviceCourierID" class="">
+                    @item.Name
+                </option>
+            }
+        </select>
+    </div>
+    <form method="post" action="@Url.Action("Index","SpecTran",new{Area="Admin"})">
+        <div class="am-input-group am-u-sm-6">
+            <input type="text" class="am-form-field" id="OrgName" name="OrgName" value="@ViewBag.OrgName" />
+            <span class="am-input-group-btn">
+                <button class="am-btn am-btn-default" type="submit">医院名称</button>
+            </span>
         </div>
-        <form method="post" action="@Url.Action("Index","SpecTran",new{Area="Admin"})">
-            <div class="am-input-group am-u-sm-6">
-                <input type="text" class="am-form-field" id="OrgName" name="OrgName" value="@ViewBag.OrgName" />
-                <span class="am-input-group-btn">
-                    <button class="am-btn am-btn-default" type="submit">医院名称</button>
-                </span>
-            </div>
-        </form>
+    </form>
 </div>
 
 <br />
@@ -37,7 +46,7 @@
     <tbody>
         @{foreach (var m in Model)
         {
-            <tr >
+            <tr>
                 <td><input type="checkbox" id="chk_@m.BarCode" val="@m.BarCode" orgname="@m.PreOrgName"></td>
                 <td>@m.PreOrgName</td>
                 <td>@m.PreDepName</td>

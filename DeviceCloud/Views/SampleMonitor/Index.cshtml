@@ -90,9 +90,10 @@
     <script type="text/javascript">
         // 百度地图API功能
         var map; // 创建Map实例
-        var chart;
-        var chartOption;
-        var sampleMonitorData;
+        var chart; // 图表实例
+        var chartOption; //图表相关选项
+        var sampleMonitorData; //样本监控类数据
+        var refreshInterval = 30000; // 数据刷新间隔
         /*
         // -------全局通用
         REFRESH: 'refresh',
@@ -171,7 +172,10 @@
                                     { type: 'average', name: '平均值' },
                                     [
                                         {
-                                            name: '温度上限', value: 8, xAxis: -1, yAxis: 8 ,
+                                            name: '温度上限',
+                                            value: 8,
+                                            xAxis: -1,
+                                            yAxis: 8,
                                             itemStyle: {
                                                 normal: {
                                                     color: '#CC66CC'
@@ -185,7 +189,10 @@
                                     ],
                                     [
                                         {
-                                            name: '温度下限', value:  2,xAxis: -1, yAxis: 2,
+                                            name: '温度下限',
+                                            value: 2,
+                                            xAxis: -1,
+                                            yAxis: 2,
                                             itemStyle: {
                                                 normal: {
                                                     color: '#99CCFF'
@@ -229,8 +236,8 @@
                                 ],
                                 clickable: false,
                             },
-                            symbol: 'none',
-                            legendHoverLink:false
+                            showAllSymbol: true,
+                            legendHoverLink: false
                         },
                         {
                             name: "湿度(%)",
@@ -242,7 +249,10 @@
                                     { type: 'average', name: '平均值' },
                                     [
                                         {
-                                            name: '湿度上限', value: 90, xAxis: -1, yAxis: 90,
+                                            name: '湿度上限',
+                                            value: 90,
+                                            xAxis: -1,
+                                            yAxis: 90,
                                             itemStyle: {
                                                 normal: {
                                                     color: '#CC66CC'
@@ -256,7 +266,10 @@
                                     ],
                                     [
                                         {
-                                            name: '湿度下限', value: 5, xAxis: -1, yAxis: 5,
+                                            name: '湿度下限',
+                                            value: 5,
+                                            xAxis: -1,
+                                            yAxis: 5,
                                             itemStyle: {
                                                 normal: {
                                                     color: '#99CCFF'
@@ -300,37 +313,13 @@
                                 ],
                                 clickable: false,
                             },
-                            symbol: 'none',
+                            showAllSymbol: true,
                             legendHoverLink: false
                         }
                     ]
                 }
             }
         );
-        //TODO:动态添加数据
-        //clearInterval(timeTicket);
-        //timeTicket = setInterval(function () {
-        //    lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
-        //    lastData = lastData.toFixed(1) - 0;
-        //    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
-
-        //    // 动态数据接口 addData
-        //    myChart.addData([
-        //        [
-        //            0,        // 系列索引
-        //            Math.round(Math.random() * 1000), // 新增数据
-        //            true,     // 新增数据是否从队列头部插入
-        //            false     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
-        //        ],
-        //        [
-        //            1,        // 系列索引
-        //            lastData, // 新增数据
-        //            false,    // 新增数据是否从队列头部插入
-        //            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
-        //            axisData  // 坐标轴标签
-        //        ]
-        //    ]);
-        //}, 2100);
         var ecConfig = require('echarts/config');
 
         function locateMarker(param) {
@@ -360,9 +349,10 @@
 
         //初始化所有点位置,时间格式:yyyyMMddHHmmss
         function loadMarkers(tranLogs) {
-            init();
+            //每次reload都需要清除地图里面的数据,但是百度地图基本无法进行该操作,所以直接重新载入
+            map_api_Clear();
             for (var i = 0; i < tranLogs.length; i++) {
-                map_api_AddWindowMarker(tranLogs[i].Longitude, tranLogs[i].Latitude, buildMarkerContent(tranLogs[i]));
+                map_api_AddWindowMarker(tranLogs[i].Longitude, tranLogs[i].Latitude, buildMarkerContent(tranLogs[i]), i, tranLogs.length);
             }
             map_api_BuildLine();
             @*var content;
@@ -395,12 +385,17 @@
             chart.setOption(chartOption);
         };
 
+        function buildNewRow(tranLog) {
+            $('#tb-body').append("<tr><td>" + tranLog.Temperature + "</td>" +
+                    "<td>" + tranLog.Humidity + "</td>" +
+                    "<td>" + tranLog.UploadTime.substring(5).replace("T", " ") + "</td></tr>");
+        }
+
         function loadTable(sampleMonitorData) {
             var tranLogs = sampleMonitorData.TranLogs;
+            $('#tb-body').html("");
             for (var i = 0; i < tranLogs.length; i++) {
-                $('#tb-body').append("<tr><td>" + tranLogs[i].Temperature + "</td>" +
-                    "<td>" + tranLogs[i].Humidity + "</td>" +
-                    "<td>" + tranLogs[i].UploadTime.substring(5).replace("T", " ") + "</td></tr>");
+                buildNewRow(tranLogs[i]);
             }
             $('#tb-courierName').html(sampleMonitorData.Courier.Name);
         }
@@ -421,6 +416,7 @@
                         loadMarkers(sampleMonitorData.TranLogs);
                         loadChart(sampleMonitorData.TranLogs);
                         loadTable(sampleMonitorData);
+                        map_api_PanTo(sampleMonitorData.TranLogs[sampleMonitorData.TranLogs.length - 1].Longitude, sampleMonitorData.TranLogs[sampleMonitorData.TranLogs.length - 1].Latitude);
                     }
                 }, "json");
         }
@@ -431,8 +427,9 @@
             map = new BMap.Map("Bmap");
             map.centerAndZoom(new BMap.Point(104.072168, 30.557979), 17); // 初始化地图,设置中心点坐标和地图级别
             map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-            map_api_Clear();
             document.body.onresize = resizeChart;
+            reloadDatas('@ViewBag.TranId');
+            self.setInterval("reloadDatas('@ViewBag.TranId')", refreshInterval);
         }
 
         function DisableA() {
