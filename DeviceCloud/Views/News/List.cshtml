@@ -1,0 +1,124 @@
+﻿@using DeviceCloud.Models
+@model IEnumerable<DeviceCloud.Models.News>
+
+<div class="am-g am-g-fixed news-g-fixed">
+    <div class="am-u-md-8">
+        @foreach (var item in Model)
+        {
+            <article class="news-main">
+                <h3 class="am-article-title news-title">
+                    <a href="@Url.Action("Details", "News")/@item.Id">@item.Title</a>
+                </h3>
+                <h4 class="am-article-meta news-meta">发布于 @item.CreateTime.ToShortDateString()</h4>
+                <div class="am-g news-content">
+                    <div class="am-u-lg-7">
+                        @item.Introduction
+                    </div>
+                    <div class="am-u-lg-5">
+                        <p>
+                            <img src="@item.CorverUrl">
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <hr class="am-article-divider news-hr">
+        }
+
+        <hr class="am-article-divider news-hr">
+        <ul class="am-pagination news-pagination">
+            <li class="am-pagination-prev @(ViewBag.CurPage != 1 ? "" : "am-disabled")"><a href="@Url.Action("List", "News")/@(ViewBag.CurPage-1)">« 上一页</a></li>
+            <li class="am-pagination-next @(ViewBag.MaxPage > ViewBag.CurPage ? "" : "am-disabled")"><a href="@Url.Action("List", "News")/@(ViewBag.CurPage+1)">下一页 »</a></li>
+        </ul>
+    </div>
+
+	<div class="am-u-md-4 news-sidebar">
+		<div class="am-panel-group">
+			<section class="am-panel am-panel-default">
+				<div class="am-panel-hd">关于慧生智医疗</div>
+				<div class="am-panel-bd">
+					<p>
+						成都慧生智医疗技术有限公司是由多家医疗流通企业在医改、互联网医疗、移动医疗、精准医疗、大数据等新形势下、组建中国领先的医疗质量管理系统服务商。
+					</p>
+					<p>
+						公司凭借原有企业在医疗信息系统建设、医疗设备和耗材销售等方面丰富经验及雄厚的资金，形成以医疗技术研发、医疗软件开发、区域医学检验实验室运营、体外诊断设备和试剂研产销为一体的创新型高科技企业。
+					</p>
+					<p>
+						公司恪守“提高医疗质量、充分体现医生价值”为核心，旨在为“聪明的病人”与“医生”搭建知识平台，提供面向医院与医疗机构一体化全新云医疗解决方案，致力于全球领先的医疗质量管理服务商、促进医疗生态系统健康发展。
+					</p>
+					<a class="am-btn am-btn-success am-btn-sm" href="@Url.Action("About", "Home")">查看更多 →</a>
+				</div>
+			</section>
+			<section class="am-panel am-panel-default">
+				<div class="am-panel-hd">最近新闻</div>
+			    <ul class="am-list news-list">
+			        @foreach (News news in ViewBag.RecentNews)
+			        {
+			            <li><a href="@news.Id">@news.Title</a></li>
+			        }
+			    </ul>
+			</section>
+		</div>
+	</div>
+
+</div>
+@section CustomStyle
+{
+	<style type="text/css">
+    @@media only screen and (min-width: 1200px) {
+      .news-g-fixed {
+        max-width: 1200px;
+      }
+    }
+
+    @@media only screen and (min-width: 641px) {
+      .news-sidebar {
+        font-size: 1.4rem;
+	      padding-top: 20px;
+          position: fixed;
+          left: 67vw;
+          max-width: 400px
+      }
+    }
+
+    .news-main {
+      padding: 20px 0;
+    }
+
+    .news-title {
+      margin: 10px 0 20px 0;
+    }
+
+    .news-meta {
+      font-size: 14px;
+      margin: 10px 0 20px 0;
+      color: #222;
+    }
+
+    .news-meta a {
+      color: #27ae60;
+    }
+
+    .news-pagination a {
+      font-size: 1.4rem;
+    }
+
+    .news-team li {
+      padding: 4px;
+    }
+
+    .news-team img {
+      margin-bottom: 0;
+    }
+
+    .news-content img,
+    .news-team img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .news-footer {
+      padding: 10px 0;
+      text-align: center;
+    }
+</style>
+}

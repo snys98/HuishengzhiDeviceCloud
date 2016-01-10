@@ -1,0 +1,43 @@
+﻿@model DeviceCloud.Models.News
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div class="am-container">
+        <h4 class="am-article-title">News</h4>
+        <hr />
+            <div class="am-article-title">
+                @Model.Title
+            </div>
+    
+            <div>
+                @Html.DisplayFor(model => model.Title)
+            </div>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
+    
+            <div>
+                @Html.DisplayFor(model => model.Content)
+            </div>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </dt>
+    
+            <div>
+                @Html.DisplayFor(model => model.CreateTime)
+            </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "List")
+    </p>
+</body>
+</html>

@@ -168,11 +168,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601100653503_Origin20160110.cs" />
+    <Compile Include="Migrations\201601100653503_Origin20160110.Designer.cs">
+      <DependentUpon>201601100653503_Origin20160110.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin\SpecWaitDealModel.cs" />
     <Compile Include="Models\Admin\SysUserModel.cs" />
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\Courier.cs" />
     <Compile Include="Models\CourierDevice.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\SiteContentContext.cs" />
     <Compile Include="Models\SampleMonitor.cs" />
     <Compile Include="Models\SpecTran.cs" />
     <Compile Include="Models\Trans.cs" />
@@ -277,7 +284,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -290,11 +299,15 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\dev.pubxml" />
-    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\List.cshtml" />
     <Content Include="Views\SampleMonitor\Index.cshtml" />
     <Content Include="Views\Shared\LoginModal.cshtml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
-    <Content Include="Views\SampleMonitor\Monitor.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +325,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601100653503_Origin20160110.resx">
+      <DependentUpon>201601100653503_Origin20160110.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

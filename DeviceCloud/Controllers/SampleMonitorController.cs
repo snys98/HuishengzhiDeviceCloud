@@ -21,10 +21,10 @@ namespace DeviceCloud.Controllers
             return View();
         }
 
-        public ActionResult Monitor()
-        {
-            return View();
-        }
+        //public ActionResult Monitor()
+        //{
+        //    return View();
+        //}
         /// <summary>
         /// 获取SampleMonitor的Json字符串形式,这个是前台必须要的数据,根据设备id和起止时间
         /// </summary>

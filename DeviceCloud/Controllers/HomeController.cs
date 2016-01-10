@@ -13,5 +13,11 @@ namespace DeviceCloud.Controllers
             ViewBag.NavId = "nav-item-home";
             return View();
         }
+
+        public ActionResult About()
+        {
+            ViewBag.NavId = "nav-item-about";
+            return View();
+        }
     }
 }
