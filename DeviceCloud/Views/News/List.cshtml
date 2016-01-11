@@ -7,7 +7,7 @@
         {
             <article class="news-main">
                 <h3 class="am-article-title news-title">
-                    <a href="@Url.Action("Details", "News")/@item.Id">@item.Title</a>
+                    <a href="@Url.Action("Details", "News",new {id = item.Id})">@item.Title</a>
                 </h3>
                 <h4 class="am-article-meta news-meta">发布于 @item.CreateTime.ToShortDateString()</h4>
                 <div class="am-g news-content">
@@ -23,11 +23,9 @@
             </article>
             <hr class="am-article-divider news-hr">
         }
-
-        <hr class="am-article-divider news-hr">
         <ul class="am-pagination news-pagination">
-            <li class="am-pagination-prev @(ViewBag.CurPage != 1 ? "" : "am-disabled")"><a href="@Url.Action("List", "News")/@(ViewBag.CurPage-1)">« 上一页</a></li>
-            <li class="am-pagination-next @(ViewBag.MaxPage > ViewBag.CurPage ? "" : "am-disabled")"><a href="@Url.Action("List", "News")/@(ViewBag.CurPage+1)">下一页 »</a></li>
+            <li class="am-pagination-prev @(ViewBag.CurPage != 1 ? "" : "am-disabled")"><a href="@Url.Action("List", "News",new {id = ViewBag.CurPage-1})">« 上一页</a></li>
+            <li class="am-pagination-next @(ViewBag.MaxPage > ViewBag.CurPage ? "" : "am-disabled")"><a href="@Url.Action("List", "News",new {id=ViewBag.CurPage+1})">下一页 »</a></li>
         </ul>
     </div>
 
@@ -53,7 +51,7 @@
 			    <ul class="am-list news-list">
 			        @foreach (News news in ViewBag.RecentNews)
 			        {
-			            <li><a href="@news.Id">@news.Title</a></li>
+			            <li>@Html.ActionLink(@news.Title, "Details", new {id = news.Id})</li>
 			        }
 			    </ul>
 			</section>

@@ -36,12 +36,9 @@ namespace DeviceCloud.Controllers
         }
 
         // GET: News1/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id=1)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            ViewBag.NavId = "nav-item-news";
             News news = db.News.Find(id);
             if (news == null)
             {

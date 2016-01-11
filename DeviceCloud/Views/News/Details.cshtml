@@ -1,43 +1,32 @@
 ﻿@model DeviceCloud.Models.News
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div class="am-container">
-        <h4 class="am-article-title">News</h4>
-        <hr />
+<div class="am-container">
+    <div class="am-article">
+        <div class="am-article-hd">
+            <h4 class="am-article-title" id="top">新闻详情</h4>
+            <hr class="am-article-divider"/>
             <div class="am-article-title">
                 @Model.Title
             </div>
-    
-            <div>
-                @Html.DisplayFor(model => model.Title)
+            <h4 class="am-article-meta">
+                发布于 @Model.CreateTime.ToShortDateString()
+            </h4>
+        </div>
+        <div class="am-article-bd">
+            <div class="am-article-lead">
+                @Model.Introduction
             </div>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Content)
-            </dt>
-    
             <div>
-                @Html.DisplayFor(model => model.Content)
+                @Model.Content
             </div>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </dt>
-    
-            <div>
-                @Html.DisplayFor(model => model.CreateTime)
-            </div>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "List")
-    </p>
-</body>
-</html>
+</div>
+<div class="am-g am-g-fixed">
+    <div class="am-u-md-1">
+        <div class="am-btn-success"  href="@Url.Action("List", "News")">编辑</div>
+    </div>
+    <div class="am-u-md-1 am-u-end">
+        <div class="am-btn-primary" href="@Url.Action("List", "News")">编辑</div>
+    </div>
+</div>
