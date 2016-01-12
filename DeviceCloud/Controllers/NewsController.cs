@@ -39,64 +39,11 @@ namespace DeviceCloud.Controllers
         public ActionResult Details(int id=1)
         {
             ViewBag.NavId = "nav-item-news";
+            ViewBag.RelatedNews = db.News.Take(3);
             News news = db.News.Find(id);
             if (news == null)
             {
                 return HttpNotFound();
-            }
-            return View(news);
-        }
-
-        // GET: News1/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: News1/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Content,CreateTime")] News news)
-        {
-            if (ModelState.IsValid)
-            {
-                db.News.Add(news);
-                db.SaveChanges();
-                return RedirectToAction("List");
-            }
-
-            return View(news);
-        }
-
-        // GET: News1/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            News news = db.News.Find(id);
-            if (news == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news);
-        }
-
-        // POST: News1/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,CreateTime")] News news)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(news).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("List");
             }
             return View(news);
         }

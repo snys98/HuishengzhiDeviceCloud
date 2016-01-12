@@ -16,7 +16,11 @@ GO
 CREATE PROCEDURE [dbo].[Sp_SaveDispatchDetail]
 (
 	@TranID UNIQUEIDENTIFIER,
-	@BarCode NVARCHAR(20)
+	@BarCode NVARCHAR(20),
+	@SpecimentTypeTemperatureMax [float],
+	@SpecimentTypeTemperatureMin [float] ,
+	@SpecimentTypeHumidityMax [float] ,
+	@SpecimentTypeHumidityMin [float] 	
 )
 AS
 BEGIN
@@ -25,7 +29,12 @@ BEGIN
 	VALUES  ( @TranID, -- TranID - uniqueidentifier
 	          @BarCode  -- BarCode - nvarchar(20)
 	          )
-	 UPDATE dbo.SpecTran SET TranStatus=1 WHERE BarCode=@BarCode
+	 UPDATE dbo.SpecTran SET TranStatus=1,
+		SpecimentTypeTemperatureMax=@SpecimentTypeTemperatureMax,
+		SpecimentTypeTemperatureMin=@SpecimentTypeTemperatureMin,
+		SpecimentTypeHumidityMax=@SpecimentTypeHumidityMax,
+		SpecimentTypeHumidityMin=@SpecimentTypeHumidityMin
+		 WHERE BarCode=@BarCode
 END
 
 

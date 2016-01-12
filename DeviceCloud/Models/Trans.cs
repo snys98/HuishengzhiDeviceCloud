@@ -121,6 +121,6 @@ namespace DeviceCloud.Models
         /// <summary>
         /// 样本条码
         /// </summary>
-        public List<string> BarCodes { get; set; }
+        public List<TranBarCode> BarCodes { get; set; }
     }
 }

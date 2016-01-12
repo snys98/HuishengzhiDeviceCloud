@@ -16,7 +16,7 @@ GO
 CREATE PROCEDURE [dbo].[Sp_ModifyTranStatus]
 (
 	@BarCode NVARCHAR(20),
-	@Status INT
+	@Status INT£ã
 )
 AS
 BEGIN	

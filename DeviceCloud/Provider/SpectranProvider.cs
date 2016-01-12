@@ -37,12 +37,12 @@ namespace DeviceCloud.Provider
             Db.ExeProc("Sp_SaveDispatch", p);
             foreach (var item in barcodes)
             {
-                Dapper.DynamicParameters dp = new Dapper.DynamicParameters();                
+                Dapper.DynamicParameters dp = new Dapper.DynamicParameters();
                 dp.Add("@BarCode", item);
-                dp.Add("@Status",1);
+                dp.Add("@Status", 1);
                 Db.ExeProc("Sp_ModifyTranStatus", dp);
             }
-            
+
         }
 
         public void SpecTranOut(Trans tran)
@@ -52,7 +52,11 @@ namespace DeviceCloud.Provider
             {
                 Dapper.DynamicParameters dp = new Dapper.DynamicParameters();
                 dp.Add("@TranID", tran.TranID);
-                dp.Add("@BarCode", item);
+                dp.Add("@BarCode", item.BarCode);
+                dp.Add("@SpecimentTypeTemperatureMax", item.SpecimentTypeTemperatureMax);
+                dp.Add("@SpecimentTypeTemperatureMin", item.SpecimentTypeTemperatureMin);
+                dp.Add("@SpecimentTypeHumidityMax", item.SpecimentTypeHumidityMax);
+                dp.Add("@SpecimentTypeHumidityMin", item.SpecimentTypeHumidityMin);
                 Db.ExeProc("Sp_SaveDispatchDetail", dp);
             }
         }

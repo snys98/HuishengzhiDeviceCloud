@@ -43,4 +43,12 @@ END
 GO
 
 
-
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE name='SpecimentTypeTemperatureMax' AND [object_id]=OBJECT_ID('SpecTran'))
+BEGIN
+	ALTER TABLE SpecTran
+		ADD [SpecimentTypeTemperatureMax] [float] NULL,
+			[SpecimentTypeTemperatureMin] [float] NULL,
+			[SpecimentTypeHumidityMax] [float] NULL,
+			[SpecimentTypeHumidityMin] [float] NULL
+END
+GO

@@ -1,9 +1,10 @@
-﻿@model DeviceCloud.Models.News
+﻿@using DeviceCloud.Models
+@model DeviceCloud.Models.News
 
-<div class="am-container">
+<div class="am-container detail-container">
     <div class="am-article">
         <div class="am-article-hd">
-            <h4 class="am-article-title" id="top">新闻详情</h4>
+            <h4 class="am-article-title">新闻详情</h4>
             <hr class="am-article-divider"/>
             <div class="am-article-title">
                 @Model.Title
@@ -22,11 +23,54 @@
         </div>
     </div>
 </div>
-<div class="am-g am-g-fixed">
-    <div class="am-u-md-1">
-        <div class="am-btn-success"  href="@Url.Action("List", "News")">编辑</div>
-    </div>
-    <div class="am-u-md-1 am-u-end">
-        <div class="am-btn-primary" href="@Url.Action("List", "News")">编辑</div>
+<div class="am-g relate-container">
+    <div class="am-container">
+        <div class="am-article-hd">
+            <h4 class="am-article-title">相关阅读</h4>
+            <hr class="am-article-divider" />
+            <div class="am-g-fixed">
+                <ul data-am-widget="gallery" class="am-gallery am-avg-sm-1 am-avg-md-3 am-gallery-bordered" data-am-gallery="{  }">
+                    @foreach (News news in ViewBag.RelatedNews)
+                    {
+                        <li>
+                            <div class="am-gallery-item">
+                                <a href="./@news.Id" class="">
+                                    <img src="@news.CorverUrl" alt="@news.Title" />
+                                    <h3 class="am-gallery-title">@news.Title</h3>
+                                    <div class="am-gallery-desc">@news.CreateTime</div>
+                                    <div>@Model.Introduction</div>
+                                </a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                @*<div class="am-u-md-4">新闻1</div>
+                <div class="am-u-md-4">新闻2</div>
+                <div class="am-u-md-4">新闻3</div>*@
+            </div>
+        </div>
     </div>
 </div>
+@section CustomStyle
+{
+    <style type="text/css">
+        .detail-container {
+            padding: 50px 18px 50px 18px;
+        }
+
+        .relate-container {
+            padding-bottom: 55px;
+        }
+        .am-gallery li {
+            padding: 10px 20px 10px 20px !important;
+        }
+        .am-gallery a {
+            color: #555;
+            font-size: 14px;
+        }
+        .am-gallery-title { 
+            color: #333 !important;
+            font-size: 18px !important;
+        }
+    </style>
+}

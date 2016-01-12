@@ -37,7 +37,7 @@
             alert("请选择承运人");
             return;
         }
-        $.post("/Admin/SpecTran/Dispatch", { DeviceCourierID: carriage, OutHospName: orgname, barcodes: barcodes }, function (result) {
+        $.post(hosturl+"Admin/SpecTran/Dispatch", { DeviceCourierID: carriage, OutHospName: orgname, barcodes: barcodes }, function (result) {
             if (result.Status == 1) {
                 alert("派工成功！");
             }

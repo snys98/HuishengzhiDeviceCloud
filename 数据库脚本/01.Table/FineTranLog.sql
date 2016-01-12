@@ -1,11 +1,11 @@
 
-/*è®¾å¤‡è·Ÿè¸ªè®°å½•è¡¨*/
+/*É¸Ñ¡³öÀ´ºÃµÄÉè±¸¸ú×Ù¼ÇÂ¼±í*/
 /****** Object:  Table [dbo].[FineTranLog]    Script Date: 12/31/2015 10:15:18 ******/
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FineTranLog]') AND type in (N'U'))
 BEGIN
 	 CREATE TABLE [dbo].[FineTranLog](
 		[Id] [uniqueidentifier] NOT NULL,
-		[TranId] [uniqueidentifier] NOT NULL,
+		[TranId] [varchar](50) NOT NULL,
 		[DataLength] [int] NOT NULL,
 		[ProtocolVersion] [int] NOT NULL,
 		[UploadInterval] [int] NOT NULL,

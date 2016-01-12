@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Common\AdminAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SpecTranController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Common\ApiErrorHandleAttribute.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\SiteContentContext.cs" />
     <Compile Include="Models\SampleMonitor.cs" />
     <Compile Include="Models\SpecTran.cs" />
+    <Compile Include="Models\TranBarCode.cs" />
     <Compile Include="Models\Trans.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\CourierProvder.cs" />
@@ -237,6 +239,8 @@
     <Content Include="Content\images\map\marker_end.png" />
     <Content Include="Content\images\map\marker_start.png" />
     <Content Include="Content\images\startup-640x1096.png" />
+    <Content Include="Content\images\top-hover.png" />
+    <Content Include="Content\images\top.png" />
     <Content Include="Content\js\amazeui.ie8polyfill.js" />
     <Content Include="Content\js\amazeui.ie8polyfill.min.js" />
     <Content Include="Content\js\amazeui.js" />
@@ -254,6 +258,11 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SpecTran\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Common\Menus.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Index.cshtml" />
     <None Include="Content\js\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\js\jquery-1.8.2.js" />
     <Content Include="Content\js\jquery-1.8.2.min.js" />
@@ -304,10 +313,7 @@
     <Content Include="Views\SampleMonitor\Index.cshtml" />
     <Content Include="Views\Shared\LoginModal.cshtml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
-    <Content Include="Views\News\Create.cshtml" />
-    <Content Include="Views\News\Delete.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
-    <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -350,7 +356,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64727</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64727/</IISUrl>
+          <IISUrl>http://localhost:64727/Device</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

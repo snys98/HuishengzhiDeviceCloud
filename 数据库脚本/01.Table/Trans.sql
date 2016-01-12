@@ -19,4 +19,3 @@ BEGIN
 	) ON [PRIMARY]
 END
 GO
-
