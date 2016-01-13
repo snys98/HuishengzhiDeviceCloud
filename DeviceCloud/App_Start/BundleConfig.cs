@@ -27,6 +27,12 @@ namespace DeviceCloud
                       "~/Content/js/nest.js",
                       "~/Content/js/amazeui.widgets.helper.js",
                       "~/Content/js/vue.js"));
+            bundles.Add(new ScriptBundle("~/bundles/umeditor-js").Include(
+                "~/Content/Admin/umeditor/umeditor.config.js",
+                "~/Content/Admin/umeditor/umeditor.js",
+                "~/Content/Admin/umeditor/lang/zh-cn/zh-cn.js"));
+            bundles.Add(new StyleBundle("~/bundles/umeditor-css").Include(
+                "~/Content/Admin/umeditor/themes/default/css/umeditor.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/ie9-lt-js").Include(
                 "~/Content/js/jquery-1.8.2.js",

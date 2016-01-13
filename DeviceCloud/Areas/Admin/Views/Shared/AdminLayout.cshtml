@@ -17,6 +17,7 @@
     <link rel="alternate icon" type="image/png" href="~/Content/favicon.ico">
     @Styles.Render("~/bundles/admin-css")
     @Scripts.Render("~/bundles/admin-js")
+    @RenderSection("CustomStyle", false)
     <script>
         var hosturl="@Url.Content("~/")";
     </script>
@@ -93,5 +94,6 @@
             license.
         </p>
     </footer>
+    @RenderSection("CustomScripts", false)
 </body>
 </html>

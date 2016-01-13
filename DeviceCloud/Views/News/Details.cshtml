@@ -17,8 +17,8 @@
             <div class="am-article-lead">
                 @Model.Introduction
             </div>
-            <div>
-                @Model.Content
+            <div class="news-content">
+                @(new HtmlString(Server.UrlDecode(Server.HtmlDecode(Model.Content))))
             </div>
         </div>
     </div>
@@ -68,9 +68,14 @@
             color: #555;
             font-size: 14px;
         }
-        .am-gallery-title { 
+        .am-gallery-title {
             color: #333 !important;
             font-size: 18px !important;
+        }
+        .news-content {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border: skyblue thick;
         }
     </style>
 }
