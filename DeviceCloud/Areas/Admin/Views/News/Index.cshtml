@@ -1,4 +1,5 @@
 ﻿@using DeviceCloud.Models
+@using Newtonsoft.Json
 @model IEnumerable<DeviceCloud.Models.News>
 
 @{
@@ -23,25 +24,47 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var news in Model)
+            @Html.AntiForgeryToken()
+            @foreach (var news in Model)
             {
-                    <tr>
-                        <td>@news.Id</td>
-                        <td>@news.Title</td>
-                        <td>@news.Introduction</td>
-                        <td>@news.CreateTime</td>
-                        <td>
-                            <div class="am-dropdown" data-am-dropdown="">
-                                <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                                <ul class="am-dropdown-content">
-                                    <li><a href="@Url.Action("Edit","News",new {Area="Admin",id=news.Id})">编辑</a></li>
-                                    <li><a href="@Url.Action("Delete","News",new {Area="Admin",id=news.Id})">删除</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                }
+                <tr>
+                    <td>@news.Id</td>
+                    <td>@news.Title</td>
+                    <td>@news.Introduction</td>
+                    <td>@news.CreateTime</td>
+                    <td>
+                        <div class="am-dropdown" data-am-dropdown="">
+                            <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
+                            <ul class="am-dropdown-content">
+                                <li><a href="@Url.Action("Edit", "News", new {Area = "Admin", id = news.Id})">编辑</a></li>
+                                <li><a onclick="deleteNews(@news.Id)">删除</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
 </div>
+@section CustomScripts
+{
+    <script type="text/javascript">
+        function deleteNews(id) {
+            $.post('@Url.Action("Delete", "News", new {Area = "Admin"})',
+                {
+                    id: id,
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").attr('value'),
+                },
+                function (data, status) {
+                    if (status=='success') {
+                        alert('删除成功');
+                        window.location.reload();
+                    } else {
+                        alert('删除失败:'+status);
+                    }
+                    
+                });
+        }
+    </script>
+}

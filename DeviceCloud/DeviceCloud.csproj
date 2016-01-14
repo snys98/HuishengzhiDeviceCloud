@@ -326,7 +326,6 @@
     <Content Include="Areas\Admin\Views\SpecTran\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Common\Menus.cshtml" />
     <Content Include="Areas\Admin\Views\News\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\News\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\News\Details.cshtml" />
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Index.cshtml" />
