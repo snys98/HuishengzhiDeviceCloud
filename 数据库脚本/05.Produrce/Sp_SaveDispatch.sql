@@ -21,18 +21,22 @@ CREATE PROCEDURE [dbo].[Sp_SaveDispatch]
 )
 AS
 BEGIN
-	INSERT INTO dbo.Trans
-	        (
-			  TranID,
-	          DeviceCourierID ,
-	          OutHospName,
-	          [Status]
-	        )
-	VALUES  ( @TranID , -- TranID - uniqueidentifier
-	          @DeviceCourierID , -- DeviceCourierID - int
-	          @OutHospName ,
-	          1 --已派工
-	        ) 
+	--如果没有对该医院该承运人的派工数据才新增派工单
+    IF NOT EXISTS(SELECT 1 FROM Trans WHERE OutHospName=@OutHospName AND DeviceCourierID=@DeviceCourierID AND [Status]=1)
+    BEGIN
+		INSERT INTO dbo.Trans
+				(
+				  TranID,
+				  DeviceCourierID ,
+				  OutHospName,
+				  [Status]
+				)
+		VALUES  ( @TranID , -- TranID - uniqueidentifier
+				  @DeviceCourierID , -- DeviceCourierID - int
+				  @OutHospName ,
+				  1 --已派工
+				) 
+	 END
 END
 
 

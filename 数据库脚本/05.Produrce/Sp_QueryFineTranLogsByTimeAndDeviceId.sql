@@ -23,3 +23,4 @@ BEGIN
 	FROM dbo.FineTranLogs as tranLog WHERE UploadTime>@StartTime and UploadTime<@Endtime AND DeviceAddress = @DeviceId
 	ORDER BY UploadTime
 END
+GO

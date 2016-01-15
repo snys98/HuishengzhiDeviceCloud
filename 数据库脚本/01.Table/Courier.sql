@@ -12,3 +12,11 @@ BEGIN
 	) ON [PRIMARY]
 END
 GO
+
+--增加微信号列
+IF NOT EXISTS(SELECT 1 FROM sys.columns WHERE name='wxcode' AND [object_id]=OBJECT_ID('Courier'))
+BEGIN
+	ALTER TABLE dbo.Courier
+		ADD wxcode NVARCHAR(100)
+END
+GO

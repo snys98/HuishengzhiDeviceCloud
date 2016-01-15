@@ -39,7 +39,7 @@
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "am-form-label am-u-md-2" })
                 <div class="am-u-md-10">
                     @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "am-form-field" } })
-                    @Html.ValidationMessageFor(model => model.Title, "标题输入不合法", new { @class = "am-text-danger" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "am-text-danger" })
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                 @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "am-form-label am-u-md-2" })
                 <div class="am-u-md-10">
                     @Html.EditorFor(model => model.Introduction, new { htmlAttributes = new { @class = "am-form-field" } })
-                    @Html.ValidationMessageFor(model => model.Introduction, "简介输入不合法", new { @class = "am-text-danger" })
+                    @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "am-text-danger" })
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
                 @Html.LabelFor(model => model.CorverUrl, htmlAttributes: new { @class = "am-form-label am-u-md-2" })
                 <div class="am-u-md-10">
                     @Html.EditorFor(model => model.CorverUrl, new { htmlAttributes = new { @class = "am-form-field" } })
-                    @Html.ValidationMessageFor(model => model.CorverUrl, "封面输入不合法", new { @class = "am-text-danger" })
+                    @Html.ValidationMessageFor(model => model.CorverUrl, "", new { @class = "am-text-danger" })
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                 @Html.LabelFor(model => model.CreateTime, htmlAttributes: new { @class = "am-form-label am-u-md-2" })
                 <div class="am-u-md-10">
                     @Html.EditorFor(model => model.CreateTime, new { htmlAttributes = new { @class = "am-form-field" } })
-                    @Html.ValidationMessageFor(model => model.CreateTime, "日期输入不合法", new { @class = "am-text-danger" })
+                    @Html.ValidationMessageFor(model => model.CreateTime, "", new { @class = "am-text-danger" })
                 </div>
             </div>
 

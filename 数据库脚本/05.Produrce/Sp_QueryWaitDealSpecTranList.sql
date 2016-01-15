@@ -31,7 +31,7 @@ SELECT PreOrgName,PreDepName,SpecimenTypeName,ItemNames,BarCode,MIN(PostTime) AS
 )
 SELECT *,ROW_NUMBER() OVER(ORDER BY PreOrgName,PostTime) AS Id INTO #t FROM t;
 
-SELECT * FROM #t WHERE Id>=@PageSize*@PageIndex AND Id<@PageSize*(@PageIndex+1)
+SELECT * FROM #t WHERE Id>@PageSize*@PageIndex AND Id<=@PageSize*(@PageIndex+1)
 SELECT @RecordCount=COUNT(1) FROM #t
 DROP TABLE #t
 END

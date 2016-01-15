@@ -11,7 +11,7 @@ namespace Weixin.Common
 {
     public class ApiResultAttribute : System.Web.Http.Filters.ActionFilterAttribute
     {
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        public override async void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             // 若发生例外则不在这边处理
             if (actionExecutedContext.Exception != null)
@@ -23,9 +23,10 @@ namespace Weixin.Common
 
             // 取得由 API 返回的状态代码
             result.Status = actionExecutedContext.ActionContext.Response.StatusCode;
-            result.Data = actionExecutedContext.ActionContext.Response.Content.ReadAsStringAsync().Result;
+            //result.Data = actionExecutedContext.ActionContext.Response.Content.ReadAsStringAsync().Result;
             // 取得由 API 返回的资料
-            result.Data = actionExecutedContext.ActionContext.Response.Content.ReadAsAsync<object>().Result;
+            if (actionExecutedContext.ActionContext.Response.Content != null)
+                result.Data = await actionExecutedContext.ActionContext.Response.Content.ReadAsAsync<object>();
             // 重新封装回传格式
             actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(result.Status, result);
         }

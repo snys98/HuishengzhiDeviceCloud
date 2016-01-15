@@ -16,13 +16,14 @@ namespace DeviceCloud.Common
             base.OnException(actionExecutedContext);
 
             // 取得发生例外时的错误讯息
-            var errorMessage = actionExecutedContext.Exception.Message;
+            var errorMessage = actionExecutedContext.Exception.Message + actionExecutedContext.Exception.StackTrace;
 
             var result = new ApiResult()
             {
                 Status = HttpStatusCode.BadRequest,
                 ErrorMessage = errorMessage
             };
+
 
             // 重新打包回传的讯息
             actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(HttpStatusCode.OK, result);

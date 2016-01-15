@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -12,24 +13,33 @@ namespace Weixin.Controllers
 {
     public class MsgController : ApiController
     {
-        public int Post([FromBody]WxMessage message)
+        public async Task<int> Post([FromBody]Message message)
         {
-            var accessToken = AccessTokenContainer.TryGetToken(ConfigHelper.CorpID, ConfigHelper.CorpSecret);
-            var data = new
+            int wxresult = 0;
+            int smsresult = 0;
+            //发送微信
+            if (message.sendtype == 0 || message.sendtype == 2)
             {
-                touser = message.touser,
-                msgtype = "text",
-                agentid = ConfigHelper.AppID,
-                text = new
+                var accessToken = AccessTokenContainer.TryGetToken(ConfigHelper.CorpID, ConfigHelper.CorpSecret);
+                var data = new
                 {
-                    content = message.body
-                },
-                safe = message.safe
-            };
-
-            var result = CommonJsonSend.Send(accessToken, Settings.SendUrl, data);
-            return (int)result.errcode;
-
+                    touser = message.wxcode,
+                    msgtype = "text",
+                    agentid = ConfigHelper.AppID,
+                    text = new
+                    {
+                        content = message.body
+                    },
+                    safe = 0
+                };
+                wxresult = (int)CommonJsonSend.Send(accessToken, Settings.SendUrl, data).errcode;
+            }
+            //发送短信
+            if (message.sendtype == 1 || message.sendtype == 2)
+            {
+                smsresult = await SmsHelper.Send(message.mobile, message.body);
+            }
+            return (wxresult == 0 && smsresult == 0) ? 0 : -1;
         }
     }
 }

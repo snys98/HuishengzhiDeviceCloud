@@ -18,7 +18,7 @@ CREATE PROCEDURE [dbo].[Sp_QueryFineTranLogsByTranId]
 AS
 BEGIN
 	SELECT tranLog.Longitude,tranLog.Latitude,tranLog.UploadTime,tranLog.Humidity,tranLog.Temperature 
-	FROM dbo.FineTranLogs as tranLog WHERE tranLog.TranId = @TranId
+	FROM dbo.FineTranLog as tranLog WHERE tranLog.TranId = @TranId
 	ORDER BY UploadTime
 END
 GO

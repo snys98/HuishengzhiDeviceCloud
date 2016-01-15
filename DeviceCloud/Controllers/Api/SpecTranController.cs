@@ -15,19 +15,12 @@ namespace DeviceCloud.Controllers.Api
     /// </summary>
     public class SpecTranController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
+        /// <summary>
+        /// 转出申请
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public int Post([FromBody]SpecTran value)
         {
             if (value == null)
@@ -37,16 +30,26 @@ namespace DeviceCloud.Controllers.Api
             return new SpectranProvider().Save(value);
         }
 
-        // PUT api/<controller>/5
-        public void Put([FromBody]string json)
+        /// <summary>
+        /// 确认转出
+        /// </summary>
+        /// <param name="data"></param>
+        public int Put([FromBody]JsonData data)
         {
-            Trans model = JsonConvert.DeserializeObject<Trans>(json);
+            Trans model = JsonConvert.DeserializeObject<Trans>(data.Json);
             new SpectranProvider().SpecTranOut(model);
+            return 0;
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        /// <summary>
+        /// 接收样本
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int Receive(string personId, string personName, string barCode)
         {
+            new SpectranProvider().ReceiveSpec(personId, personName, barCode);
+            return 0;
         }
     }
 }

@@ -5,20 +5,24 @@ using System.Web;
 
 namespace Weixin.Models
 {
-    public class WxMessage
+    public class Message
     {
-        public WxMessage()
+        public Message()
         {
-            safe = 0;
+            sendtype = 0;
         }
         /// <summary>
         /// 消息接收用户
         /// </summary>
-        public string touser { get; set; }
+        public string wxcode { get; set; }
+        public string mobile { get; set; }
         /// <summary>
         /// 消息正文
         /// </summary>
         public string body { get; set; }
-        public int safe { get; set; }
+        /// <summary>
+        /// 发送类型:0微信;1短信;2都发
+        /// </summary>
+        public int sendtype { get; set; }
     }
 }

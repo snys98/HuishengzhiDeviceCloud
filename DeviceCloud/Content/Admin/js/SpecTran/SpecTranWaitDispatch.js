@@ -40,6 +40,7 @@
         $.post(hosturl+"Admin/SpecTran/Dispatch", { DeviceCourierID: carriage, OutHospName: orgname, barcodes: barcodes }, function (result) {
             if (result.Status == 1) {
                 alert("派工成功！");
+                gopage(0);
             }
             else {
                 alert(result.ErrorMessage);
@@ -48,3 +49,8 @@
 
     });
 });
+
+function gopage(index) {
+    $("#PageIndex").val(index);
+    $("#form1").submit();
+}

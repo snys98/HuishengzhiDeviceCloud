@@ -181,6 +181,7 @@
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\Courier.cs" />
     <Compile Include="Models\CourierDevice.cs" />
+    <Compile Include="Models\JsonData.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\SiteContentContext.cs" />
     <Compile Include="Models\SampleMonitor.cs" />
@@ -383,6 +384,7 @@
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\SampleMonitor\Monitor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

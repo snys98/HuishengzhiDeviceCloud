@@ -23,6 +23,21 @@ CREATE PROCEDURE [dbo].[Sp_QueryCourierForBarCode]
 AS
 BEGIN
 	SET NOCOUNT ON;
+	--没有派工记录自动生成一条派工记录
+	IF NOT EXISTS(SELECT 1 FROM dbo.Trans a 
+			INNER JOIN dbo.TransDeviceCourierRef b  ON a.DeviceCourierID=b.Id
+			INNER JOIN dbo.Courier c ON b.CourierId=c.CourierId
+			WHERE c.BarCode=@BarCode AND a.OutHospName=@OrgName AND a.[Status]=1)
+	BEGIN
+		DECLARE @id INT,@tranid UNIQUEIDENTIFIER
+		SET @tranid=NEWID()
+		SELECT @id=b.id FROM TransDeviceCourierRef b INNER JOIN dbo.Courier c ON b.CourierId=c.CourierId
+			WHERE c.BarCode=@BarCode AND b.Statuts=1
+		IF(@id IS NOT NULL)
+		BEGIN
+			EXEC Sp_SaveDispatch @tranid,@id,@OrgName
+		END
+	END
 	SELECT a.*,c.*,b.Id AS DeviceCourierID,d.TranID FROM dbo.Courier a
 		INNER JOIN dbo.TransDeviceCourierRef b  ON b.CourierId = a.CourierId
 		INNER JOIN dbo.TransDevice c ON c.DeviceId=b.TransDeviceId

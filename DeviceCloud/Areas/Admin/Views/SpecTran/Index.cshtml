@@ -20,8 +20,9 @@
             }
         </select>
     </div>
-    <form method="post" action="@Url.Action("Index","SpecTran",new{Area="Admin"})">
+    <form name="form1" id="form1" method="post" action="@Url.Action("Index","SpecTran",new{Area="Admin"})">
         <div class="am-input-group am-u-sm-6">
+            <input type="hidden" id="PageIndex" name="PageIndex" value="0" />
             <input type="text" class="am-form-field" id="OrgName" name="OrgName" value="@ViewBag.OrgName" />
             <span class="am-input-group-btn">
                 <button class="am-btn am-btn-default" type="submit">医院名称</button>
@@ -68,11 +69,11 @@
             {
                 if (i == ViewBag.PageIndex)
                 {
-                    <li class="am-active"><a href="#">@(i + 1)</a></li>
+                    <li class="am-active"><a href="javascript:gopage(@(i ))">@(i + 1)</a></li>
                 }
                 else
                 {
-                    <li><a href="#">@(i + 1)</a></li>
+                    <li><a href="javascript:gopage(@(i))">@(i + 1)</a></li>
                 }
             }
         }

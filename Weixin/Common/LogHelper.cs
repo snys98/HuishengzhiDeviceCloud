@@ -43,6 +43,15 @@ namespace Weixin.Common
             log.Error(message);
         }
 
+        public static void Info(object message, Exception exception)
+        {
+            log.Info(message, exception);
+        }
+
+        public static void Info(object message)
+        {
+            log.Info(message);
+        }
 
         #endregion
 

@@ -113,12 +113,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\ApiErrorHandleAttribute.cs" />
+    <Compile Include="Common\SmsHelper.cs" />
     <Compile Include="Controllers\MsgController.cs" />
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Common\ApiResultAttribute.cs" />

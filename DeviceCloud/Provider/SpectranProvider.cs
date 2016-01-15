@@ -47,7 +47,15 @@ namespace DeviceCloud.Provider
 
         public void SpecTranOut(Trans tran)
         {
-            Db.ExeProc<Trans>("Sp_SaveSpecTranOut", tran);
+            Dapper.DynamicParameters p = new Dapper.DynamicParameters();
+            p.Add("@TranID", tran.TranID);
+            p.Add("@DeviceCourierID", tran.DeviceCourierID);
+            p.Add("@OutPersonName", tran.OutPersonName);
+            p.Add("@OutHospID", tran.OutHospID);
+            p.Add("@OutPersonID", tran.OutPersonID);
+            p.Add("@ReceiveHospName", tran.ReceiveHospName);
+            p.Add("@ReceiveHospID", tran.ReceiveHospID);
+            Db.ExeProc("Sp_SaveSpecTranOut", p);
             foreach (var item in tran.BarCodes)
             {
                 Dapper.DynamicParameters dp = new Dapper.DynamicParameters();
@@ -59,6 +67,15 @@ namespace DeviceCloud.Provider
                 dp.Add("@SpecimentTypeHumidityMin", item.SpecimentTypeHumidityMin);
                 Db.ExeProc("Sp_SaveDispatchDetail", dp);
             }
+        }
+
+        public void ReceiveSpec(string personId,string personName,string barcode)
+        {
+            Dapper.DynamicParameters p = new Dapper.DynamicParameters();
+            p.Add("@PersonName",personName);
+            p.Add("@PersonID", personId);
+            p.Add("@BarCode",barcode);
+            Db.ExeProc("Sp_SaveDispatchDetail", p);
         }
     }
 }

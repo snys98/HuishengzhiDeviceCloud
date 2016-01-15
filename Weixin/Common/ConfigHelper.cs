@@ -16,14 +16,30 @@ namespace Weixin.Common
             Token = ConfigurationManager.AppSettings["Token"];
             EncodingAESKey = ConfigurationManager.AppSettings["EncodingAESKey"];
             AppID = Convert.ToInt32(ConfigurationManager.AppSettings["AppID"]);
-            CorpSecret=ConfigurationManager.AppSettings["CorpSecret"];
+            CorpSecret = ConfigurationManager.AppSettings["CorpSecret"];
+            SmsAccount = ConfigurationManager.AppSettings["SmsAccount"];
+            SmsPassword = ConfigurationManager.AppSettings["SmsPassword"];
+            SmsUrl = ConfigurationManager.AppSettings["SmsUrl"];
         }
+
+        /// <summary>
+        /// SMS接口账号
+        /// </summary>
+        public static string SmsAccount { private set; get; }
+        /// <summary>
+        /// SMS密码
+        /// </summary>
+        public static string SmsPassword { private set; get; }
+        /// <summary>
+        /// SMS接口地址
+        /// </summary>
+        public static string SmsUrl { private set; get; }
         public static string CorpSecret
         {
             private set;
             get;
         }
-        
+
         public static int AppID
         {
             private set;

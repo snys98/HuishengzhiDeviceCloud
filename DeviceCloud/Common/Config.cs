@@ -9,7 +9,7 @@ namespace DeviceCloud
     {
         static Config()
         {
-            DefaultPageSize = 20;
+            DefaultPageSize = 15;
         }
         public static int DefaultPageSize { get; set; }
     }

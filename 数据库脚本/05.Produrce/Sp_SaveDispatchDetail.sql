@@ -29,7 +29,7 @@ BEGIN
 	VALUES  ( @TranID, -- TranID - uniqueidentifier
 	          @BarCode  -- BarCode - nvarchar(20)
 	          )
-	 UPDATE dbo.SpecTran SET TranStatus=1,
+	 UPDATE dbo.SpecTran SET TranStatus=2,
 		SpecimentTypeTemperatureMax=@SpecimentTypeTemperatureMax,
 		SpecimentTypeTemperatureMin=@SpecimentTypeTemperatureMin,
 		SpecimentTypeHumidityMax=@SpecimentTypeHumidityMax,
